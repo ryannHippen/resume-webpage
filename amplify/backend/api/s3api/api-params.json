@@ -1,0 +1,34 @@
+{
+    "paths": [
+        {
+            "name": "/services",
+            "lambdaFunction": "s3",
+            "privacy": {
+                "open": true
+            }
+        }
+    ],
+    "resourceName": "s3api",
+    "apiName": "s3api",
+    "functionArns": [
+        {
+            "lambdaFunction": "s3"
+        }
+    ],
+    "privacy": {
+        "auth": 0,
+        "unauth": 0,
+        "authRoleName": "amplify-resume-master-132004-authRole",
+        "unAuthRoleName": "amplify-resume-master-132004-unauthRole"
+    },
+    "dependsOn": [
+        {
+            "category": "function",
+            "resourceName": "s3",
+            "attributes": [
+                "Name",
+                "Arn"
+            ]
+        }
+    ]
+}
