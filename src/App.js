@@ -75,6 +75,7 @@ class App extends Component {
             // backgroundSize: 'cover',
             // backgroundRepeat: 'no-repeat',
             overflowX: 'hidden',
+            overflowY: 'hidden',
             backgroundColor: '#FCF8D2'
             // backgroundColor: '#606060'
       }
@@ -82,7 +83,7 @@ class App extends Component {
 
     return (
       <Router>
-        <div className="hideOverflow">
+        <div className="">
           {/* <NavBar/> */}
           <MuiThemeProvider theme={muiTheme}>
             

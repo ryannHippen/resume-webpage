@@ -242,6 +242,7 @@ Amplify.configure({
 
     return (
 <MuiThemeProvider theme={theme}>
+    <div className="overflowHidden">
     <div className={classes.root}>
         
         <Tabs 
@@ -511,6 +512,7 @@ Amplify.configure({
             }
             </TabPanel>
         </Container>
+    </div>
     </div>
     </MuiThemeProvider>
     );

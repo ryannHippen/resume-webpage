@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import styled from "styled-components";
 import { Typography, Grid,
     Box, Button, ListSubheader, Paper, List, 
     ListItem, ListItemText, ListItemIcon, Container,
@@ -152,7 +153,6 @@ Amplify.configure({
         {'technology': 'MySQL', 'svg': Mysql},
         {'technology': 'Spring Boot', 'svg': Springio},
     ]
-
   
   const useStyles = makeStyles(theme => ({
     root: {
@@ -163,46 +163,73 @@ Amplify.configure({
         boxShadow: 'none',
         alignItems: 'center',
     },
+    listItemText:{
+        fontSize:'0.1em',
+      },
+    title : {
+        fontSize: 15,
+    },
+    titleMobile : {
+        fontSize: 10,
+    },
     heading: {
         fontSize: theme.typography.pxToRem(15),
         fontWeight: theme.typography.fontWeightRegular,
       },
     tabs: {
         borderRight: `0px solid ${theme.palette.divider}`,
-        marginTop: 30,
-        marginBottom: 30,
+        marginTop: 60,
+        marginBottom: 60,
         marginRight: 20,
         color: 'white',  
         fontSize: '14px',
     },
     tabsMobile: {
         borderRight: `0px solid ${theme.palette.divider}`,
-        marginTop: 30,
-        marginBottom: 30,
+        marginTop: 45,
+        marginBottom: 45,
         marginRight: 20,
         color: 'white',  
         fontSize: '10px',
     },
     paperContainer: {
-        // overflow: 'hidden',
         backgroundColor: '#FCF8D2',
         boxShadow: 'none',
         width: '60vw',
         paddingBottom: '10px',
         paddingTop: '10px',
         //minHeight: '70vh',
+        
     },
     paperContainerLeft: {
-        // overflow: 'hidden',
         backgroundColor: '#FCF8D2',
         boxShadow: 'none',
         width: '20vw',
     },
     paperContainerRight: {
-        // overflow: 'hidden',
         backgroundColor: '#FCF8D2',
         boxShadow: 'none',
         width: '40vw',
+    },
+    paperContainerMobile: {
+        backgroundColor: '#FCF8D2',
+        boxShadow: 'none',
+        //width: '60vw',
+        paddingBottom: '10px',
+        paddingTop: '10px',
+        //minHeight: '70vh',
+        
+    },
+    paperContainerLeftMobile: {
+        backgroundColor: '#FCF8D2',
+        boxShadow: 'none',
+        //width: '20vw',
+    },
+    paperContainerRightMobile: {
+        backgroundColor: '#FCF8D2',
+        boxShadow: 'none',
+        //width: '40vw',
+        height: '23vh',
     },
     buttonContainer: {
         backgroundColor: 'transparent',
@@ -211,18 +238,26 @@ Amplify.configure({
         height: "20px",
         margin: "auto",
     },
+    devIconStyleMobile: {
+        height: "15px",
+        margin: "auto",
+    },
     schoolIconStyle: {
         height: "200px",
         margin: "auto",
         opacity: 0.75,
     },
     schoolIconStyleMobile: {
-        height: "110px",
+        height: "95px",
         margin: "auto",
         opacity: 0.75,
     },
     card: {
         width: 450,
+    },
+    cardMobile: {
+        // width: '50vw',
+        // height: '36vh',
     },
     educationFont: {
         paddingLeft: '10px',
@@ -234,22 +269,26 @@ Amplify.configure({
         color: '#FCF8D2'
     },
     educationFontMobile: {
-        paddingLeft: '5px',
-        paddingRight: '5px',
+        // paddingLeft: '2px',
+        // paddingRight: '2px',
         fontFamily: 'EB Garamond',
-        fontSize: '13px',
+        fontSize: '12px',
         fontStyle: 'italic',
         fontWeight: 300,
         color: '#FCF8D2'
     },
     tabPosition: {
         position: 'absolute',
+    },
+    description: {
+        fontSize: '15px',
+    },
+    descriptionMobile: {
+        fontSize: '10px',
     }
   }));
   
  function VerticalTabs({screen}) {
-    const screenHeight = screen.screenHeight;
-    const screenWidth = screen.screenWidth;
     const classes = useStyles();
     const [value, setValue] = React.useState(0);
     const bull = <span className={classes.bullet}>•</span>;
@@ -328,19 +367,27 @@ Amplify.configure({
                 </Grid>                                
             </TabPanel> */}
             <TabPanel value={value} index={0} >
+                {screen.screenWidth > 600 ?
                 <Grid container direction="row" justify="center" spacing={10} >
                     <Grid item>
                         <Card className={classes.card} >
                             <CardContent>
+                                <Typography className={classes.title} color="textSecondary" gutterBottom>
+                                    Front End
+                                </Typography>
                                 <List dense={true}>
-                                {technologiesFE.map((tech) =>
-                                    <ListItem  disableGutters={true}>
-                                        <ListItemIcon >
-                                            <img src={tech.svg} alt="" className={classes.devIconStyle}></img>
-                                        </ListItemIcon>
-                                        <ListItemText primary={tech.technology} /> 
-                                    </ListItem>
-                                )}
+                                    <Grid container direction="row">
+                                    {technologiesFE.map((tech) =>
+                                        <Grid item xs={6}>
+                                            <ListItem  disableGutters={true}>
+                                                <ListItemIcon >
+                                                    <img src={tech.svg} alt="" className={classes.devIconStyle}></img>
+                                                </ListItemIcon>
+                                                <ListItemText primary={tech.technology} /> 
+                                            </ListItem>
+                                        </Grid>
+                                    )}
+                                    </Grid>
                                 </List>
                             </CardContent>
                         </Card>
@@ -348,20 +395,81 @@ Amplify.configure({
                     <Grid item>
                         <Card className={classes.card}>
                             <CardContent>
+                                <Typography className={classes.title} color="textSecondary" gutterBottom>
+                                    Back End
+                                </Typography>
                                 <List dense={true}>
-                                {technologiesBE.map((tech) =>
-                                    <ListItem  disableGutters={true}>
-                                        <ListItemIcon >
-                                            <img src={tech.svg} alt="" className={classes.devIconStyle}></img>
-                                        </ListItemIcon>
-                                        <ListItemText primary={tech.technology} /> 
-                                    </ListItem>
-                                )}
+                                    <Grid container direction="row">
+                                    {technologiesBE.map((tech) =>
+                                        <Grid item xs={6}>
+                                            <ListItem  disableGutters={true}>
+                                                <ListItemIcon >
+                                                    <img src={tech.svg} alt="" className={classes.devIconStyle}></img>
+                                                </ListItemIcon>
+                                                <ListItemText  primary={tech.technology} /> 
+                                            </ListItem>
+                                        </Grid>
+                                    )}
+                                    </Grid>
                                 </List>
                             </CardContent>
                         </Card>
                     </Grid>
                 </Grid>
+                :
+                <Grid container direction="row" justify="center" spacing={5} >
+                    <Grid item>
+                        <Card className={classes.cardMobile} >
+                            <CardContent>
+                                <Typography className={classes.titleMobile} color="textSecondary" gutterBottom>
+                                    Front End
+                                </Typography>
+                                <List dense={true}>
+                                    <Grid container direction="row">
+                                    {technologiesFE.map((tech) =>
+                                        <Grid item xs={6} >
+                                            <ListItem  disableGutters={true}>
+                                                {/* <ListItemIcon >
+                                                    <img src={tech.svg} alt="" className={classes.devIconStyleMobile}></img>
+                                                </ListItemIcon> */}
+                                                <Typography className={classes.titleMobile}>
+                                                    <ListItemText disableTypography={true} primary={tech.technology} /> 
+                                                </Typography>
+                                            </ListItem>
+                                        </Grid>
+                                    )}
+                                    </Grid>
+                                </List>
+                            </CardContent>
+                        </Card>
+                    </Grid>
+                    <Grid item>
+                        <Card className={classes.cardMobile}>
+                            <CardContent>
+                                <Typography className={classes.titleMobile} color="textSecondary" gutterBottom>
+                                    Back End
+                                </Typography>
+                                <List dense={true}>
+                                    <Grid container direction="row">
+                                    {technologiesBE.map((tech) =>
+                                        <Grid item xs={6}>
+                                            <ListItem  disableGutters={true}>
+                                                {/* <ListItemIcon >
+                                                    <img src={tech.svg} alt="" className={classes.devIconStyleMobile}></img>
+                                                </ListItemIcon> */}
+                                                <Typography className={classes.titleMobile}>
+                                                    <ListItemText disableTypography={true} primary={tech.technology} /> 
+                                                </Typography>
+                                            </ListItem>
+                                        </Grid>
+                                    )}
+                                    </Grid>
+                                </List>
+                            </CardContent>
+                        </Card>
+                    </Grid>
+                </Grid>
+                }
             </TabPanel>
             <TabPanel value={value} index={1}  >
                 {screen.screenWidth > 600 ?
@@ -414,37 +522,70 @@ Amplify.configure({
                 
             </TabPanel >
             <TabPanel value={value} index={2} >
-                {work.map(job =>  
-                    <Box pb={3}> 
-                        <Paper className={classes.paperContainer}> 
-                            <Grid container direction='row' >
-                                <Paper className={classes.paperContainerLeft}>
-                                    <Grid container justify='center' >
-                                        {job.company}
-                                    </Grid>
-                                </Paper> 
-                                <Paper className={classes.paperContainerRight}>
-                                    {job.description.map((desc, i) =>    
-                                        <Typography key={i}>
-                                            <Box pb={1}>{desc}</Box>
-                                            
-                                            {job.bulletPoints[i].length > 0 ? 
-                                                <ul>
-                                                    <li >{job.bulletPoints[i]}</li>
-                                                </ul>
-                                                :null
-                                            }
-                                        </Typography>
-                                    )}
-                                </Paper>
-                            </Grid>
-                        </Paper>
-                    </Box> 
-                )}
+                {screen.screenWidth > 600 ?
+                <Box > 
+                    {work.map(job =>  
+                        <Box pl={10} pb={3}> 
+                            <Paper className={classes.paperContainer}> 
+                                <Grid container direction='row'>
+                                    <Paper className={classes.paperContainerLeft}>
+                                        <Grid container justify='center' >
+                                            <Typography className={classes.description} >{job.company}</Typography>
+                                        </Grid>
+                                    </Paper> 
+                                    <Paper className={classes.paperContainerRight}>
+                                        {job.description.map((desc, i) =>    
+                                            <Typography className={classes.description} key={i}>
+                                                <Box pb={1}>{desc}</Box>
+                                                {job.bulletPoints[i].length > 0 ? 
+                                                    <ul>
+                                                        <li >{job.bulletPoints[i]}</li>
+                                                    </ul>
+                                                    :null
+                                                }
+                                            </Typography>
+                                        )}
+                                    </Paper>
+                                </Grid>
+                            </Paper>
+                        </Box> 
+                    )}
+                </Box> 
+                :
+                <Box > 
+                    {work.map(job =>  
+                        <Box pb={2}> 
+                            <Paper className={classes.paperContainerMobile}> 
+                                <Grid container direction='row'>
+                                    <Paper className={classes.paperContainerLeftMobile}>
+                                        <Grid container justify='center' >
+                                            <Typography className={classes.descriptionMobile} >{job.company}</Typography>
+                                        </Grid>
+                                    </Paper> 
+                                    <Paper className={classes.paperContainerRightMobile}>
+                                        {job.description.map((desc, i) =>    
+                                            <Typography className={classes.descriptionMobile} key={i}>
+                                                <Box pb={1}>{desc}</Box>
+                                                {job.bulletPoints[i].length > 0 ? 
+                                                    <ul>
+                                                        <li >{job.bulletPoints[i]}</li>
+                                                    </ul>
+                                                    :null
+                                                }
+                                            </Typography>
+                                        )}
+                                    </Paper>
+                                </Grid>
+                            </Paper>
+                        </Box> 
+                    )}
+                </Box> 
+                }
+                
             </TabPanel>
             <TabPanel value={value} index={3} >
                 {screen.screenHeight}
-            {screen,screenWidth > 500 ? 
+            {screen.screenWidth > 500 ? 
                 <Typography>{screen.screenWidth }</Typography>
                 :null
             }

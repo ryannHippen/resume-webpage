@@ -33,6 +33,11 @@ https://coolors.co/c00149-dba964-10edfb-66c6da-fcf8d2 */
   color: #61dafb;
 }
 
+.overflowHidden {
+  overflow-y: hidden;
+  overflow-x: hidden;
+}
+
 .navBarText {
   /* display: inline-block; */
   padding:4px 8px;
