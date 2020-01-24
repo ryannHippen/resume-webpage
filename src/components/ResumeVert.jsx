@@ -309,6 +309,7 @@ Amplify.configure({
         
        
         {/* </Tabs> */}
+        {/* updates */}
         <Container maxWidth='lg' disableGutters>
             {/* <TabPanel  value={value} index={0}>
                 <Grid container  justify="center" >
