@@ -131,6 +131,24 @@ Amplify.configure({
       'bulletPoints' : 
       ['point','point']},
     ]
+
+    const technologies = [
+        {'technology': 'React.js', 'svg': Reactjs},
+        {'technology': 'Material UI', 'svg': Material},
+        {'technology': 'Bootstrap', 'svg': Bootstrap},
+        {'technology': 'JavaScript', 'svg': Javascript},
+        {'technology': 'CSS', 'svg': Css},
+        {'technology': 'HTML', 'svg': Html},
+        {'technology': 'Redux', 'svg': Redux},
+        {'technology': 'Java', 'svg': Java},
+        {'technology': 'AWS: Cloudfront', 'svg': Cloudfront},
+        {'technology': 'AWS: Route 53', 'svg': Route53},
+        {'technology': 'AWS: S3', 'svg': S3},
+        {'technology': 'Python', 'svg': Python},
+        {'technology': 'Hibernate', 'svg': Hibernate},
+        {'technology': 'MySQL', 'svg': Mysql},
+        {'technology': 'Spring Boot', 'svg': Springboot},
+    ]
   
   const useStyles = makeStyles(theme => ({
     root: {

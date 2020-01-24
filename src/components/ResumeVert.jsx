@@ -131,6 +131,28 @@ Amplify.configure({
       'bulletPoints' : 
       ['point','point']},
     ]
+
+    const technologiesFE = [
+        {'technology': 'React.js', 'svg': Reactjs},
+        {'technology': 'Material UI', 'svg': Material},
+        {'technology': 'Bootstrap', 'svg': Bootstrap},
+        {'technology': 'JavaScript', 'svg': Javascript},
+        {'technology': 'CSS', 'svg': Css},
+        {'technology': 'HTML', 'svg': Html},
+        {'technology': 'Redux', 'svg': Redux},
+    ]
+
+    const technologiesBE = [
+        {'technology': 'Java', 'svg': Java},
+        {'technology': 'AWS: Cloudfront', 'svg': Cloudfront},
+        {'technology': 'AWS: Route 53', 'svg': Route53},
+        {'technology': 'AWS: S3', 'svg': S3},
+        {'technology': 'Python', 'svg': Python},
+        {'technology': 'Hibernate', 'svg': Hibernate},
+        {'technology': 'MySQL', 'svg': Mysql},
+        {'technology': 'Spring Boot', 'svg': Springio},
+    ]
+
   
   const useStyles = makeStyles(theme => ({
     root: {
@@ -149,7 +171,17 @@ Amplify.configure({
         borderRight: `0px solid ${theme.palette.divider}`,
         marginTop: 30,
         marginBottom: 30,
+        marginRight: 20,
         color: 'white',  
+        fontSize: '14px',
+    },
+    tabsMobile: {
+        borderRight: `0px solid ${theme.palette.divider}`,
+        marginTop: 30,
+        marginBottom: 30,
+        marginRight: 20,
+        color: 'white',  
+        fontSize: '10px',
     },
     paperContainer: {
         // overflow: 'hidden',
@@ -184,6 +216,11 @@ Amplify.configure({
         margin: "auto",
         opacity: 0.75,
     },
+    schoolIconStyleMobile: {
+        height: "110px",
+        margin: "auto",
+        opacity: 0.75,
+    },
     card: {
         width: 450,
     },
@@ -194,6 +231,15 @@ Amplify.configure({
         fontSize: '22px',
         fontStyle: 'italic',
         fontWeight: 500,
+        color: '#FCF8D2'
+    },
+    educationFontMobile: {
+        paddingLeft: '5px',
+        paddingRight: '5px',
+        fontFamily: 'EB Garamond',
+        fontSize: '13px',
+        fontStyle: 'italic',
+        fontWeight: 300,
         color: '#FCF8D2'
     },
     tabPosition: {
@@ -225,7 +271,7 @@ Amplify.configure({
     return (
 <MuiThemeProvider theme={theme}>
     <div className={classes.root}>
-        
+    {screen.screenWidth > 700 ? 
         <Tabs 
           orientation="vertical"
           value={value}
@@ -235,16 +281,34 @@ Amplify.configure({
         >
     
         {/* <Tab className={classes.tabs} label="Download Resume" {...a11yProps(0)}></Tab> */}
+        
+            <Tab className={classes.tabs} label="Technologies" {...a11yProps(0)} />
+            <Tab className={classes.tabs} label="Education" {...a11yProps(1)} />
+            <Tab className={classes.tabs} label="Work Experience" {...a11yProps(2)}  />
+            <Tab className={classes.tabs} label="Contact Me" {...a11yProps(3)} />
 
-        <Tab className={classes.tabs} label="Technologies" {...a11yProps(0)} />
-
-        <Tab className={classes.tabs} label="Education" {...a11yProps(1)} />
-
-        <Tab className={classes.tabs} label="Work Experience" {...a11yProps(2)}  />
-
-        <Tab className={classes.tabs} label="Contact Me" {...a11yProps(3)} />
+            </Tabs>
+            :
+            <Tabs 
+          orientation="vertical"
+          value={value}
+          onChange={handleChange}
+          indicatorColor="primary"
+        //   textColor="primary"
+        >
+    
+        {/* <Tab className={classes.tabs} label="Download Resume" {...a11yProps(0)}></Tab> */}
+        
+            <Tab className={classes.tabsMobile} label="Technologies" {...a11yProps(0)} />
+            <Tab className={classes.tabsMobile} label="Education" {...a11yProps(1)} />
+            <Tab className={classes.tabsMobile} label="Work Experience" {...a11yProps(2)}  />
+            <Tab className={classes.tabsMobile} label="Contact Me" {...a11yProps(3)} />
+        
+            </Tabs>
+        }
+        
        
-        </Tabs>
+        {/* </Tabs> */}
         <Container maxWidth='lg' disableGutters>
             {/* <TabPanel  value={value} index={0}>
                 <Grid container  justify="center" >
@@ -264,150 +328,43 @@ Amplify.configure({
             </TabPanel> */}
             <TabPanel value={value} index={0} >
                 <Grid container direction="row" justify="center" spacing={10} >
-                    <Grid item >
-                        <Card className={classes.card} variant="elevation" elevation={10}>
+                    <Grid item>
+                        <Card className={classes.card} >
                             <CardContent>
-                                 <Typography className={classes.title} color="textSecondary" gutterBottom>
-                                    Front End
-                                </Typography>
-                                <Box container >
-                                    <Grid container direction="row" justify="space-around"      >
-                                        <Grid item>                                
-                                            <Box container direction=""   >
-                                                <List dense={false}>
-                                                    <ListItem disableGutters={true}>
-                                                        <ListItemIcon >
-                                                            <img src={Reactjs} alt="" className={classes.devIconStyle}></img>
-                                                        </ListItemIcon>
-                                                        <ListItemText primary=" React.js" /> 
-                                                    </ListItem>
-                                                    <ListItem disableGutters={true}>
-                                                        <ListItemIcon>
-                                                            <img src={Material} alt="" className={classes.devIconStyle}></img>                                        
-                                                        </ListItemIcon>
-                                                        <ListItemText primary="Material UI" /> 
-                                                    </ListItem>                                        
-                                                    <ListItem disableGutters={true}>
-                                                        <ListItemIcon>
-                                                            <img src={Bootstrap} alt="" className={classes.devIconStyle}></img>
-                                                        </ListItemIcon>
-                                                        <ListItemText primary="Bootstrap" />
-                                                    </ListItem>
-                                                    <ListItem disableGutters={true}> 
-                                                        <ListItemIcon>
-                                                            <img src={Javascript} alt="" className={classes.devIconStyle}></img>
-                                                        </ListItemIcon>
-                                                        <ListItemText primary="JavaScript" />                               
-                                                    </ListItem>
-                                                </List>
-                                            </Box>
-                                        </Grid>
-                                    <Grid item >       
-                                        <Box container direction=""  >
-                                            <List dense={false} >                                    
-                                                <ListItem disableGutters={true}> 
-                                                    <ListItemIcon>
-                                                        <img src={Css} alt="" className={classes.devIconStyle}></img>
-                                                    </ListItemIcon>
-                                                    <ListItemText primary="CSS" />                                  
-                                                </ListItem>
-                                                <ListItem disableGutters={true}> 
-                                                    <ListItemIcon>
-                                                        <img src={Html} alt="" className={classes.devIconStyle}></img>
-                                                    </ListItemIcon>
-                                                    <ListItemText primary="HTML" />                                 
-                                                </ListItem>    
-                                                <ListItem disableGutters={true}>
-                                                    <ListItemIcon>
-                                                        <img src={Redux} alt="" className={classes.devIconStyle}></img>
-                                                    </ListItemIcon>
-                                                    <ListItemText primary="Redux" />                                      
-                                                </ListItem>                                                                                
-                                            </List>
-                                        </Box>
-                                    </Grid>
-                                </Grid>
-                            </Box>
-                        </CardContent>
-                    </Card>
+                                <List dense={true}>
+                                {technologiesFE.map((tech) =>
+                                    <ListItem  disableGutters={true}>
+                                        <ListItemIcon >
+                                            <img src={tech.svg} alt="" className={classes.devIconStyle}></img>
+                                        </ListItemIcon>
+                                        <ListItemText primary={tech.technology} /> 
+                                    </ListItem>
+                                )}
+                                </List>
+                            </CardContent>
+                        </Card>
+                    </Grid>
+                    <Grid item>
+                        <Card className={classes.card}>
+                            <CardContent>
+                                <List dense={true}>
+                                {technologiesBE.map((tech) =>
+                                    <ListItem  disableGutters={true}>
+                                        <ListItemIcon >
+                                            <img src={tech.svg} alt="" className={classes.devIconStyle}></img>
+                                        </ListItemIcon>
+                                        <ListItemText primary={tech.technology} /> 
+                                    </ListItem>
+                                )}
+                                </List>
+                            </CardContent>
+                        </Card>
+                    </Grid>
                 </Grid>
-                <Grid item  >
-                    <Card className={classes.card} variant="elevation" elevation={10}>
-                        <CardContent>
-                            <Typography className={classes.title} color="textSecondary" gutterBottom>
-                                Back End
-                            </Typography>
-                            <Box container >
-                                <Grid container direction="row" justify="space-around" alignItems=""     >
-                                    <Grid item>                                
-                                        <Box container direction=""   >
-                                        <List dense={false} >                                    
-                                            <ListItem disableGutters={true}>
-                                                <ListItemIcon>
-                                                    <img src={Java} alt="" className={classes.devIconStyle}></img>
-                                                </ListItemIcon>
-                                                <ListItemText primary="Java" />
-                                            </ListItem>                                                                          
-                                            <ListItem disableGutters={true}>  
-                                                <ListItemIcon> 
-                                                    <img src={Cloudfront} alt="" className={classes.devIconStyle}></img>
-                                                </ListItemIcon>
-                                                <ListItemText primary="AWS: CloudFront" />   
-                                            </ListItem>
-                                            <ListItem disableGutters={true}>  
-                                                <ListItemIcon> 
-                                                    <img src={Route53} alt="" className={classes.devIconStyle}></img>
-                                                </ListItemIcon>
-                                                <ListItemText primary="AWS: Route 53" />  
-                                            </ListItem>
-                                            <ListItem disableGutters={true}>  
-                                                <ListItemIcon> 
-                                                    <img src={S3} alt="" className={classes.devIconStyle}></img>
-                                                </ListItemIcon>
-                                                <ListItemText primary="AWS: S3" />   
-                                            </ListItem>                                                                              
-                                        </List>
-                                    </Box>
-                                </Grid>
-                                <Grid item>       
-                                    <Box container direction="" >
-                                    <List dense={false}>
-                                            <ListItem disableGutters={true}> 
-                                                <ListItemIcon>
-                                                    <img src={Python} alt="" className={classes.devIconStyle}></img>
-                                                </ListItemIcon>
-                                                <ListItemText primary="Python" />                                 
-                                            </ListItem>  
-                                            <ListItem disableGutters={true}> 
-                                                <ListItemIcon>
-                                                    <img src={Hibernate} alt="" className={classes.devIconStyle}></img>
-                                                </ListItemIcon>
-                                                <ListItemText primary="Hibernate" />
-                                            </ListItem>
-                                            <ListItem disableGutters={true}>   
-                                                <ListItemIcon> 
-                                                    <img src={Mysql} alt="" className={classes.devIconStyle}></img>
-                                                </ListItemIcon>
-                                                <ListItemText primary="MySQL" />   
-                                            </ListItem>
-                                            <ListItem disableGutters={true}>
-                                                    <ListItemIcon>
-                                                        <img src={Springio} alt="" className={classes.devIconStyle}></img>
-                                                    </ListItemIcon>
-                                                    <ListItemText primary="Spring Boot" />                                      
-                                            </ListItem>    
-                                        </List>
-                                        </Box>
-                                    </Grid>
-                                </Grid>
-                            </Box>
-                        </CardContent>
-                    </Card>
-                </Grid>
-            </Grid>
             </TabPanel>
             <TabPanel value={value} index={1}  >
-                <Grid container direction="column" justify="center" alignItems="center" >
+                {screen.screenWidth > 600 ?
+                    <Grid container direction="column" justify="center" alignItems="center" >
                     <Grid item>  
                         <Box container>
                             <img src={Wrightstate} alt="" className={classes.schoolIconStyle}></img>                            
@@ -429,6 +386,31 @@ Amplify.configure({
                         </Box> 
                     </Grid>
                 </Grid>
+                :
+                <Grid container direction="column" justify="center" alignItems="center" >
+                    <Grid item>  
+                        <Box container>
+                            <img src={Wrightstate} alt="" className={classes.schoolIconStyleMobile}></img>                            
+                        </Box>  
+                    </Grid>
+                    <Grid item >
+                        <Box container mt={5}>                            
+                            <Typography className={classes.educationFontMobile}>B.S.B - Management Information Systems</Typography>
+                        </Box>
+                    </Grid>
+                    <Grid item>
+                        <Box container>                            
+                            <Typography className={classes.educationFontMobile}>Graduated - December 2018</Typography>
+                        </Box> 
+                    </Grid>
+                    <Grid item>
+                        <Box container>                            
+                            <Typography className={classes.educationFontMobile}>GPA - 3.81/4.00</Typography>
+                        </Box> 
+                    </Grid>
+                </Grid>
+                }
+                
             </TabPanel >
             <TabPanel value={value} index={2} >
                 {work.map(job =>  
@@ -458,36 +440,10 @@ Amplify.configure({
                         </Paper>
                     </Box> 
                 )}
-                {/* <Box container p={10}>
-                    {work.map(job =>
-                        <Box pb={5}>
-                            <ExpansionPanel>
-                                <ExpansionPanelSummary
-                                expandIcon={<ExpandMoreIcon />}
-                                aria-controls="panel1a-content"
-                                id="panel1a-header"
-                                >
-                                <Typography className={classes.heading}>{job.company}</Typography>
-                                </ExpansionPanelSummary>
-                                <ExpansionPanelDetails>
-                                <Typography>
-                                    <Typography>{job.description}</Typography>
-                                    <ul>
-                                        
-                                    {job.bulletPoints.map((bullet, i) =>    
-                                        <li key={i}>{bullet}</li>
-                                        )}
-                                    </ul>
-                                </Typography>
-                                </ExpansionPanelDetails>
-                            </ExpansionPanel>
-                        </Box>
-                    )}
-                </Box> */}
             </TabPanel>
             <TabPanel value={value} index={3} >
-                dfdsfds
-            {screen !== undefined ? 
+                {screen.screenHeight}
+            {screen,screenWidth > 500 ? 
                 <Typography>{screen.screenWidth }</Typography>
                 :null
             }

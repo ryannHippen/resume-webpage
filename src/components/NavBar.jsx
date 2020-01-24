@@ -161,19 +161,23 @@ class NavBar extends Component{
             <MuiThemeProvider theme={muiTheme}>
                 <AppBar position="" className={classes.appBarBackground} >
                     <Toolbar>
-                        {this.props.screen.screenWidth > 500 ?
+                        {this.props.screen.screenWidth > 700 ?
                         <Grid container direction="row" justify="center" spacing={4}>
                             
                         <Grid item >
                             
                             <ButtonBase disableRipple type="button"  onClick= {() => { this.navToAbout() }}>
-                                <Typography className="navBarText" color={this.state.colorAbout} >ABOUT</Typography>
+                                <Typography className="navBarText" color={this.state.colorAbout} >
+                                    <span className="navBarText">ABOUT</span>
+                                </Typography>
                             </ButtonBase>
                             {/* <Link style={{ textDecoration: 'none' }} to="/about"><span><h3 className="navBarText">ABOUT</h3></span></Link> */}
                         </Grid>
                         <Grid item >
                             <ButtonBase disableRipple type="button"  onClick= {() => { this.navToResume() }}>
-                                <Typography className="navBarText" color={this.state.colorResume}>RESUME</Typography>
+                                <Typography className="navBarText" color={this.state.colorResume}>
+                                    <span className="navBarText">RESUME</span>
+                                </Typography>
                             </ButtonBase>
                             {/* <Link style={{ textDecoration: 'none' }} to="/resume"><span><h3 className="navBarText">RESUME</h3></span></Link> */}
                         </Grid>
@@ -185,13 +189,17 @@ class NavBar extends Component{
                         </Grid> */}
                         <Grid item >
                             <ButtonBase disableRipple type="button" onClick= {() => { this.navToProjects() }}>
-                                <Typography className="navBarText" color={this.state.colorProjects}>PROJECTS</Typography>
+                                <Typography className="navBarText" color={this.state.colorProjects}>
+                                    <span className="navBarText">PROJECTS</span>
+                                </Typography>
                             </ButtonBase>
                             {/* <Link style={{ textDecoration: 'none' }} to="/projects"><span><h3 className="navBarText">PROJECTS</h3></span></Link> */}
                         </Grid>
                         <Grid item >
                             <ButtonBase disableRipple type="button"  onClick= {() => { this.navToContact() }}>
-                                <Typography className="navBarText" color={this.state.colorContact}>CONTACT</Typography>
+                                <Typography className="navBarText" color={this.state.colorContact}>
+                                    <span className="navBarText">CONTACT</span>
+                                </Typography>
                             </ButtonBase>
                             {/* <Link style={{ textDecoration: 'none' }} to="/contact"><span><h3 className="navBarText">CONTACT</h3></span></Link> */}
                         </Grid>
@@ -200,36 +208,44 @@ class NavBar extends Component{
                         :
                         <Grid container direction="row" justify="center" spacing={0}>
                             <Grid item >
-                                
-                                <ButtonBase disableRipple type="button"  onClick= {() => { this.navToAbout() }}>
-                                    <Typography className="navBarTextMobile" color={this.state.colorAbout} >ABOUT</Typography>
-                                </ButtonBase>
-                                {/* <Link style={{ textDecoration: 'none' }} to="/about"><span><h3 className="navBarText">ABOUT</h3></span></Link> */}
-                            </Grid>
-                            <Grid item >
-                                <ButtonBase disableRipple type="button"  onClick= {() => { this.navToResume() }}>
-                                    <Typography className="navBarTextMobile" color={this.state.colorResume}>RESUME</Typography>
-                                </ButtonBase>
-                                {/* <Link style={{ textDecoration: 'none' }} to="/resume"><span><h3 className="navBarText">RESUME</h3></span></Link> */}
-                            </Grid>
-                            {/* <Grid item >
-                                <ButtonBase disableRipple type="button"  onClick= {() => { this.navToResumeVert() }}>
-                                    <span><h3 className="navBarText">RESUME-VERT</h3></span>
-                                </ButtonBase>
-                                <Link style={{ textDecoration: 'none' }} to="/resume/vert"><span><h3 className="navBarText">RESUME-VERT</h3></span></Link>      
-                            </Grid> */}
-                            <Grid item >
-                                <ButtonBase disableRipple type="button" onClick= {() => { this.navToProjects() }}>
-                                    <Typography className="navBarTextMobile" color={this.state.colorProjects}>PROJECTS</Typography>
-                                </ButtonBase>
-                                {/* <Link style={{ textDecoration: 'none' }} to="/projects"><span><h3 className="navBarText">PROJECTS</h3></span></Link> */}
-                            </Grid>
-                            <Grid item >
-                                <ButtonBase disableRipple type="button"  onClick= {() => { this.navToContact() }}>
-                                    <Typography className="navBarTextMobile" color={this.state.colorContact}>CONTACT</Typography>
-                                </ButtonBase>
-                                {/* <Link style={{ textDecoration: 'none' }} to="/contact"><span><h3 className="navBarText">CONTACT</h3></span></Link> */}
-                            </Grid>
+                            
+                            <ButtonBase disableRipple type="button"  onClick= {() => { this.navToAbout() }}>
+                                <Typography className="navBarText" color={this.state.colorAbout} >
+                                    <span className="navBarTextMobile">ABOUT</span>
+                                </Typography>
+                            </ButtonBase>
+                            {/* <Link style={{ textDecoration: 'none' }} to="/about"><span><h3 className="navBarText">ABOUT</h3></span></Link> */}
+                        </Grid>
+                        <Grid item >
+                            <ButtonBase disableRipple type="button"  onClick= {() => { this.navToResume() }}>
+                                <Typography className="navBarText" color={this.state.colorResume}>
+                                    <span className="navBarTextMobile">RESUME</span>
+                                </Typography>
+                            </ButtonBase>
+                            {/* <Link style={{ textDecoration: 'none' }} to="/resume"><span><h3 className="navBarText">RESUME</h3></span></Link> */}
+                        </Grid>
+                        {/* <Grid item >
+                            <ButtonBase disableRipple type="button"  onClick= {() => { this.navToResumeVert() }}>
+                                <span><h3 className="navBarText">RESUME-VERT</h3></span>
+                            </ButtonBase>
+                            <Link style={{ textDecoration: 'none' }} to="/resume/vert"><span><h3 className="navBarText">RESUME-VERT</h3></span></Link>      
+                        </Grid> */}
+                        <Grid item >
+                            <ButtonBase disableRipple type="button" onClick= {() => { this.navToProjects() }}>
+                                <Typography className="navBarText" color={this.state.colorProjects}>
+                                    <span className="navBarTextMobile">PROJECTS</span>
+                                </Typography>
+                            </ButtonBase>
+                            {/* <Link style={{ textDecoration: 'none' }} to="/projects"><span><h3 className="navBarText">PROJECTS</h3></span></Link> */}
+                        </Grid>
+                        <Grid item >
+                            <ButtonBase disableRipple type="button"  onClick= {() => { this.navToContact() }}>
+                                <Typography className="navBarText" color={this.state.colorContact}>
+                                    <span className="navBarTextMobile">CONTACT</span>
+                                </Typography>
+                            </ButtonBase>
+                            {/* <Link style={{ textDecoration: 'none' }} to="/contact"><span><h3 className="navBarText">CONTACT</h3></span></Link> */}
+                        </Grid>
                             
                         </Grid>
                         }
