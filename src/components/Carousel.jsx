@@ -6,7 +6,7 @@ import Git from '../icons/git.svg'
 import Python from '../icons/python.svg'
 import { Grid, Box } from '@material-ui/core';
  
-class DemoCarousel extends Component {
+class ProjectCarousel extends Component {
     render() {
         return (
             <Grid container direction="row" alignItems="center">
@@ -41,4 +41,4 @@ class DemoCarousel extends Component {
     }
 }
 
-export default DemoCarousel;
+export default ProjectCarousel;

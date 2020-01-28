@@ -77,17 +77,31 @@ height: 0;
 } */
 
 .resumeDiv {
-height: 55px;
+height: 45px;
+display: flex;
+vertical-align: middle;
+color: whitesmoke;
+}
+
+.downloadResume {
+height: 30px;
 display: flex;
 vertical-align: middle;
 color: whitesmoke;
 }
 
 .resumeDiv:hover {
-background-color: palegreen;
-color: gray;
+background-color: #66C6DA;
+color: #FCF8D2;
 
 }
+
+.resumeDivMobile {
+  height: 30px;
+  display: flex;
+  vertical-align: middle;
+  color: whitesmoke;
+  }
 
 .responsive {
   width:100vw;

@@ -14,9 +14,7 @@ const muiTheme = createMuiTheme({
         primary: {main: "#f48fb1", contrastText: "#6a1b9a"},
         secondary: {main: "#9e9e9e", contrastText: "#6a1b9a"},
         position: 'absolute',
-        
     },
-
   });
 
 const styles = theme => ({
@@ -83,14 +81,6 @@ class NavBar extends Component{
         this.navToResumeVert = this.navToResumeVert.bind(this);
     }
 
-    componentDidMount() {
-
-    }
-
-    componentDidUpdate() {
-
-      }
-
     navToAbout(){
         if (this.state.currentPage !== 'about'){
             this.setState({
@@ -102,7 +92,6 @@ class NavBar extends Component{
                 colorContact: 'secondary',
             })
             this.props.history.push(`/about`);
-
         }
     }
 
@@ -154,8 +143,8 @@ class NavBar extends Component{
 
     render(){
         const { classes } = this.props;
+
         return (
-    
         <Wrapper>
             <span hidden><Screensize /></span>
             <MuiThemeProvider theme={muiTheme}>
@@ -163,15 +152,12 @@ class NavBar extends Component{
                     <Toolbar>
                         {this.props.screen.screenWidth > 700 ?
                         <Grid container direction="row" justify="center" spacing={4}>
-                            
                         <Grid item >
-                            
                             <ButtonBase disableRipple type="button"  onClick= {() => { this.navToAbout() }}>
                                 <Typography className="navBarText" color={this.state.colorAbout} >
                                     <span className="navBarText">ABOUT</span>
                                 </Typography>
                             </ButtonBase>
-                            {/* <Link style={{ textDecoration: 'none' }} to="/about"><span><h3 className="navBarText">ABOUT</h3></span></Link> */}
                         </Grid>
                         <Grid item >
                             <ButtonBase disableRipple type="button"  onClick= {() => { this.navToResume() }}>
@@ -179,21 +165,13 @@ class NavBar extends Component{
                                     <span className="navBarText">RESUME</span>
                                 </Typography>
                             </ButtonBase>
-                            {/* <Link style={{ textDecoration: 'none' }} to="/resume"><span><h3 className="navBarText">RESUME</h3></span></Link> */}
                         </Grid>
-                        {/* <Grid item >
-                            <ButtonBase disableRipple type="button"  onClick= {() => { this.navToResumeVert() }}>
-                                <span><h3 className="navBarText">RESUME-VERT</h3></span>
-                            </ButtonBase>
-                            <Link style={{ textDecoration: 'none' }} to="/resume/vert"><span><h3 className="navBarText">RESUME-VERT</h3></span></Link>      
-                        </Grid> */}
                         <Grid item >
                             <ButtonBase disableRipple type="button" onClick= {() => { this.navToProjects() }}>
                                 <Typography className="navBarText" color={this.state.colorProjects}>
                                     <span className="navBarText">PROJECTS</span>
                                 </Typography>
                             </ButtonBase>
-                            {/* <Link style={{ textDecoration: 'none' }} to="/projects"><span><h3 className="navBarText">PROJECTS</h3></span></Link> */}
                         </Grid>
                         <Grid item >
                             <ButtonBase disableRipple type="button"  onClick= {() => { this.navToContact() }}>
@@ -201,9 +179,7 @@ class NavBar extends Component{
                                     <span className="navBarText">CONTACT</span>
                                 </Typography>
                             </ButtonBase>
-                            {/* <Link style={{ textDecoration: 'none' }} to="/contact"><span><h3 className="navBarText">CONTACT</h3></span></Link> */}
                         </Grid>
-                        
                     </Grid>
                         :
                         <Grid container direction="row" justify="center" spacing={0}>
@@ -214,7 +190,6 @@ class NavBar extends Component{
                                     <span className="navBarTextMobile">ABOUT</span>
                                 </Typography>
                             </ButtonBase>
-                            {/* <Link style={{ textDecoration: 'none' }} to="/about"><span><h3 className="navBarText">ABOUT</h3></span></Link> */}
                         </Grid>
                         <Grid item >
                             <ButtonBase disableRipple type="button"  onClick= {() => { this.navToResume() }}>
@@ -222,21 +197,13 @@ class NavBar extends Component{
                                     <span className="navBarTextMobile">RESUME</span>
                                 </Typography>
                             </ButtonBase>
-                            {/* <Link style={{ textDecoration: 'none' }} to="/resume"><span><h3 className="navBarText">RESUME</h3></span></Link> */}
                         </Grid>
-                        {/* <Grid item >
-                            <ButtonBase disableRipple type="button"  onClick= {() => { this.navToResumeVert() }}>
-                                <span><h3 className="navBarText">RESUME-VERT</h3></span>
-                            </ButtonBase>
-                            <Link style={{ textDecoration: 'none' }} to="/resume/vert"><span><h3 className="navBarText">RESUME-VERT</h3></span></Link>      
-                        </Grid> */}
                         <Grid item >
                             <ButtonBase disableRipple type="button" onClick= {() => { this.navToProjects() }}>
                                 <Typography className="navBarText" color={this.state.colorProjects}>
                                     <span className="navBarTextMobile">PROJECTS</span>
                                 </Typography>
                             </ButtonBase>
-                            {/* <Link style={{ textDecoration: 'none' }} to="/projects"><span><h3 className="navBarText">PROJECTS</h3></span></Link> */}
                         </Grid>
                         <Grid item >
                             <ButtonBase disableRipple type="button"  onClick= {() => { this.navToContact() }}>
@@ -244,12 +211,10 @@ class NavBar extends Component{
                                     <span className="navBarTextMobile">CONTACT</span>
                                 </Typography>
                             </ButtonBase>
-                            {/* <Link style={{ textDecoration: 'none' }} to="/contact"><span><h3 className="navBarText">CONTACT</h3></span></Link> */}
                         </Grid>
                             
                         </Grid>
                         }
-                        
                     </Toolbar>
                 </AppBar>
             </MuiThemeProvider>
@@ -266,9 +231,6 @@ NavBar.propTypes = {
     classes: PropTypes.object.isRequired,
     screen: PropTypes.bool.isRequired
   };
-  
-// export default withRouter(withStyles(styles)connect(mapStateToProps)(NavBar));
-
 
 export default compose(
     withStyles(styles),

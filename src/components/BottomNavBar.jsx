@@ -55,15 +55,12 @@ class BottomNavBar extends Component{
     render(){
         const styles = {
             paperContainer: {
-                // height: '15vh',
-                // width: '100vw',
                 overflow: 'hidden',
                 backgroundColor: 'transparent',
                 boxShadow: 'none',
             },
             bottomNavigationContainer: {
                 backgroundColor: 'transparent', 
-
             }
           };
 
@@ -74,7 +71,6 @@ class BottomNavBar extends Component{
                         <Divider variant="inset" />
                     </Box>
                 </Grid>
-                
                 <Grid container direction="row" justify="center" alignItems="center"     >
                         <Grid item xs={12} sm={4}>
                             <Typography align="center">Email</Typography>

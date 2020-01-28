@@ -3,11 +3,6 @@ import { Typography, Grid, Paper } from '@material-ui/core';
 
 class About extends Component{
 
-    componentDidMount() {
-        
-    }
-
-
     render(){
 
         const styles = {

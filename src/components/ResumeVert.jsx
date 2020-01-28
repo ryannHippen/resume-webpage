@@ -37,6 +37,7 @@ import Tab from '@material-ui/core/Tab';
 
 import { MuiThemeProvider, createMuiTheme }  from "@material-ui/core/styles";
 import { connect } from 'react-redux';
+import ResumeContact from './ResumeContact'
 
 
 
@@ -123,14 +124,22 @@ Amplify.configure({
       ['','Technologies used were Spring Boot with Hibernate/JPA which connected to a MySQL backend, and Angular for the front end connecting to Spring Boot with REST API','', '']},
 
       {'company': 'Marxent Labs',  'title' : 'Data Specialist', 'location' : 'Miamisburg, OH' ,
-      'description': [''],
-      'bulletPoints' : 
-      ['point','point']},
+        'description': ['Work with Business Analysts to obtain client specific information for the products that will be in the application and what the application itself needs.',
+        'Work with the Development team to work out a spec sheet for the product data and application data',
+        'Use MySQL for CRUD operations to ensure data requirements are met.',
+        'Work with Project Managers regarding client deadlines, and coordinate with the 3D department as part of my work is dependent on 3D models to be completed.'],
+      
+        'bulletPoints' : 
+      ['','','','']},
       
       {'company': 'Reynolds & Reynolds', 'title' : 'Software Support Specialist', 'location' : 'Kettering, OH' ,
-      'description': [''], 
-      'bulletPoints' : 
-      ['point','point']},
+        'description': ['Help customers who are experiencing issues with the software or have questions about how it functions.',
+        'Train new hires or groups from other departments on the software they will be supporting',
+        'Access Database maintenance and creation',], 
+      'bulletPoints' : [
+        'Document errors with the software and submit reports to development to either implement a change or correct flaws found',
+        'In class style training that lasts a week (typically 2 – 6 people)',
+        'I’ve created a front-end application with Access and a back-end Access database. This is used by all the departments under the Director of the Technical Assistance Center (TAC) that helps track employee time off and special projects. This amounts to 6 separate departments with a combined employee count of over 140.']},
     ]
 
     const technologiesFE = [
@@ -195,29 +204,34 @@ Amplify.configure({
     paperContainer: {
         backgroundColor: '#FCF8D2',
         boxShadow: 'none',
-        width: '60vw',
+        width: '70vw',
         paddingBottom: '10px',
         paddingTop: '10px',
-        //minHeight: '70vh',
+        // height: '25vh',
+        //overflow: 'auto',
         
     },
     paperContainerLeft: {
         backgroundColor: '#FCF8D2',
         boxShadow: 'none',
         width: '20vw',
+        overflow: 'auto',
     },
     paperContainerRight: {
         backgroundColor: '#FCF8D2',
         boxShadow: 'none',
-        width: '40vw',
+        width: '50vw',
+        maxHeight: '23vh',
+        overflow: 'auto',
     },
     paperContainerMobile: {
         backgroundColor: '#FCF8D2',
         boxShadow: 'none',
         //width: '60vw',
-        paddingBottom: '10px',
-        paddingTop: '10px',
+        paddingBottom: '2px',
+        paddingTop: '2px',
         //minHeight: '70vh',
+        
         
     },
     paperContainerLeftMobile: {
@@ -230,6 +244,7 @@ Amplify.configure({
         boxShadow: 'none',
         //width: '40vw',
         height: '23vh',
+        overflow: 'auto',
     },
     buttonContainer: {
         backgroundColor: 'transparent',
@@ -281,7 +296,7 @@ Amplify.configure({
         position: 'absolute',
     },
     description: {
-        fontSize: '15px',
+        fontSize: '14px',
     },
     descriptionMobile: {
         fontSize: '10px',
@@ -584,11 +599,47 @@ Amplify.configure({
                 
             </TabPanel>
             <TabPanel value={value} index={3} >
-                {screen.screenHeight}
-            {screen.screenWidth > 500 ? 
-                <Typography>{screen.screenWidth }</Typography>
-                :null
-            }
+                {screen.screenWidth > 600 ? 
+                    <Box>
+                        {/* <Grid container  justify="center" >
+                            <Box className="resumeDiv" border={3} >
+                                <Button
+                                    color='primary'
+                                    className={classes.buttonContainer}
+                                    onClick={getResume}
+                                    size="small"
+                                    startIcon={<SaveIcon />}
+                                    fullWidth={true}
+                                    >
+                                    <Typography color='primary'  variant="subtitle2" >Download Resume</Typography>
+                                </Button> 
+                            </Box> 
+                        </Grid> */}
+                        <Box pt={5}>
+                            <ResumeContact /> 
+                        </Box>
+                    </Box>
+                    :
+                    <Box>
+                        {/* <Grid container  justify="center" >
+                            <Box className="resumeDivMobile" border={3} >
+                                <Button
+                                    color='primary'
+                                    className={classes.buttonContainer}
+                                    onClick={getResume}
+                                    size="small"
+                                    startIcon={<SaveIcon />}
+                                    fullWidth={true}
+                                    >
+                                    <Typography color='primary'  variant="subtitle2" >Download Resume</Typography>
+                                </Button> 
+                            </Box> 
+                        </Grid> */}
+                        <Box pt={5}>
+                            <ResumeContact /> 
+                        </Box> 
+                    </Box>
+                }
             </TabPanel>
         </Container>
     </div>
