@@ -127,6 +127,7 @@ class ResumeContact extends Component{
                             defaultValue=""
                             style={styles.textField}
                             margin="normal"
+                            InputProps={{ style: { color: 'white' } }}
                         />
                         <TextField
                             required
@@ -135,6 +136,7 @@ class ResumeContact extends Component{
                             defaultValue=""
                             style={styles.textField}
                             margin="normal"
+                            InputProps={{ style: { color: 'white' } }}
                         />
                     </Grid>
                     <Grid item>
@@ -145,15 +147,17 @@ class ResumeContact extends Component{
                             defaultValue=""
                             style={styles.singleLineTextField}
                             margin="normal"
+                            InputProps={{ style: { color: 'white' } }}
                         />
                     </Grid>
                     <Grid item>
                         <TextField
                             id="standard-name"
-                            label="Position"
+                            label="Position Available"
                             defaultValue=""
                             style={styles.singleLineTextField}
                             margin="normal"
+                            InputProps={{ style: { color: 'white' } }}
                         />
                     </Grid>
                     <Grid item>
@@ -163,6 +167,7 @@ class ResumeContact extends Component{
                             defaultValue=""
                             style={styles.textField}
                             margin="normal"
+                            InputProps={{ style: { color: 'white' } }}
                         />
                         <TextField
                             id="standard-name"
@@ -170,6 +175,7 @@ class ResumeContact extends Component{
                             defaultValue=""
                             style={styles.textField}
                             margin="normal"
+                            InputProps={{ style: { color: 'white' } }}
                         />
                     </Grid>
                     <Grid item>
@@ -181,9 +187,28 @@ class ResumeContact extends Component{
                             style={styles.singleLineTextField}
                             margin="normal"
                             variant="outlined"
+                            size="small"
+                            rowsMax={5}
+                            rows={10}
+                            InputProps={{ style: { color: 'white' } }}
                         />
                     </Grid>
                 </Grid>              
+                <Box pt={3} pb={5}>
+                    <Grid container direction="column" justify="center" alignItems="center" >
+                        <Box pb={2}>
+                            <Button size="small">
+                                <Typography variant="outlined" color="primary" style={styles.sendText}>Send</Typography>
+                            </Button>
+                        </Box>
+                        <Box width="30%">
+                            <Grid container direction="column"  >
+                                <Divider />
+                            </Grid>
+                        </Box>
+                    </Grid>
+                </Box>
+                <Box pt={1}>
                 <BottomNavigation style={styles.bottomNavigationContainer}>  
                     <Tooltip title="My GitHub Homepage">
                         <Button onClick={this.navToGitHub} size="small">
@@ -201,6 +226,7 @@ class ResumeContact extends Component{
                         </Button>
                     </Tooltip>
                 </BottomNavigation>
+                </Box>
             </Paper>
         )
     }

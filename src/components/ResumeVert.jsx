@@ -1,15 +1,7 @@
-import React, { useState } from 'react';
-import styled from "styled-components";
-import { Typography, Grid,
-    Box, Button, ListSubheader, Paper, List, 
-    ListItem, ListItemText, ListItemIcon, Container,
-     Divider, Card, CardActionArea, CardContent, CardHeader,
-    CardMedia, CardActions } from '@material-ui/core';
+import React from 'react';
+import { Typography, Grid, Box, Paper, List, ListItem, ListItemText, ListItemIcon, Container, Card, CardContent } from '@material-ui/core';
 import Amplify, { Storage } from 'aws-amplify';
-// import awsconfig from '../aws-exports';
-import SaveIcon from '@material-ui/icons/Save';
 import config from '../ampconfig';
-// import DevIcon from "devicon-react-svg";
 import Hibernate from '../icons/hibernate.svg'
 import Material from '../icons/material.svg'
 import Springio from '../icons/springio.svg'
@@ -19,35 +11,23 @@ import Html from '../icons/html.svg'
 import Reactjs from '../icons/reactjs.svg'
 import Mysql from '../icons/mysql.svg'
 import Javascript from '../icons/javascript.svg'
-import Github from '../icons/github.svg'
 import Java from '../icons/java.svg'
-import Aws from '../icons/aws.svg'
 import Route53 from '../icons/route53.svg'
 import S3 from '../icons/s3.svg'
 import Cloudfront from '../icons/cloudfront.svg'
-import Git from '../icons/git.svg'
 import Python from '../icons/python.svg'
 import Redux from '../icons/redux.svg'
 import Wrightstate from '../icons/wrightState.svg'
-
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
-
 import { MuiThemeProvider, createMuiTheme }  from "@material-ui/core/styles";
 import { connect } from 'react-redux';
 import ResumeContact from './ResumeContact'
-
-
-
-// const Demo = props => {
-//     return (<RandomIcon />);
-// }
+import ResumeContactMobile from './ResumeContactMobile'
 
 // Amplify.configure(awsconfig); 
-// Amplify.configure(ampconfig); 
-
 Amplify.configure({
     Auth: {
       mandatorySignIn: false,
@@ -71,8 +51,6 @@ Amplify.configure({
       ]
     }
   });
-
-  
 
   function TabPanel(props) {
     const { children, value, index, ...other } = props;
@@ -101,14 +79,13 @@ Amplify.configure({
     return {
       id: `vertical-tab-${index}`,
       'aria-controls': `vertical-tabpanel-${index}`,
-      
     };
   }
 
   const theme = createMuiTheme({
     palette: {
       primary: {main: '#FCF8D2'},
-      secondary: {main: '#10EDFB'}
+      secondary: {main: '#84ffff'}
     },
   });
 
@@ -195,9 +172,9 @@ Amplify.configure({
     },
     tabsMobile: {
         borderRight: `0px solid ${theme.palette.divider}`,
-        marginTop: 45,
-        marginBottom: 45,
-        marginRight: 20,
+        marginTop: 40,
+        marginBottom: 40,
+        marginRight: 27,
         color: 'white',  
         fontSize: '10px',
     },
@@ -207,9 +184,6 @@ Amplify.configure({
         width: '70vw',
         paddingBottom: '10px',
         paddingTop: '10px',
-        // height: '25vh',
-        //overflow: 'auto',
-        
     },
     paperContainerLeft: {
         backgroundColor: '#FCF8D2',
@@ -227,24 +201,19 @@ Amplify.configure({
     paperContainerMobile: {
         backgroundColor: '#FCF8D2',
         boxShadow: 'none',
-        //width: '60vw',
-        paddingBottom: '2px',
-        paddingTop: '2px',
-        //minHeight: '70vh',
-        
-        
+        paddingBottom: '1px',
     },
     paperContainerLeftMobile: {
         backgroundColor: '#FCF8D2',
         boxShadow: 'none',
-        //width: '20vw',
+        padding: '1px',
     },
     paperContainerRightMobile: {
         backgroundColor: '#FCF8D2',
         boxShadow: 'none',
-        //width: '40vw',
         height: '23vh',
         overflow: 'auto',
+        padding: '3px',
     },
     buttonContainer: {
         backgroundColor: 'transparent',
@@ -270,10 +239,6 @@ Amplify.configure({
     card: {
         width: 450,
     },
-    cardMobile: {
-        // width: '50vw',
-        // height: '36vh',
-    },
     educationFont: {
         paddingLeft: '10px',
         paddingRight: '10px',
@@ -284,8 +249,6 @@ Amplify.configure({
         color: '#FCF8D2'
     },
     educationFontMobile: {
-        // paddingLeft: '2px',
-        // paddingRight: '2px',
         fontFamily: 'EB Garamond',
         fontSize: '12px',
         fontStyle: 'italic',
@@ -296,9 +259,15 @@ Amplify.configure({
         position: 'absolute',
     },
     description: {
-        fontSize: '14px',
+        fontSize: '13px',
     },
     descriptionMobile: {
+        fontSize: '9px',
+    },
+    company: {
+        fontSize: '14px',
+    },
+    companyMobile: {
         fontSize: '10px',
     }
   }));
@@ -306,7 +275,6 @@ Amplify.configure({
  function VerticalTabs({screen}) {
     const classes = useStyles();
     const [value, setValue] = React.useState(0);
-    const bull = <span className={classes.bullet}>•</span>;
   
     const handleChange = (event, newValue) => {
       setValue(newValue);
@@ -325,62 +293,35 @@ Amplify.configure({
     return (
 <MuiThemeProvider theme={theme}>
     <div className={classes.root}>
-    {screen.screenWidth > 700 ? 
-        <Tabs 
-          orientation="vertical"
-          value={value}
-          onChange={handleChange}
-          indicatorColor="primary"
-        //   textColor="primary"
-        >
-    
-        {/* <Tab className={classes.tabs} label="Download Resume" {...a11yProps(0)}></Tab> */}
-        
-            <Tab className={classes.tabs} label="Technologies" {...a11yProps(0)} />
-            <Tab className={classes.tabs} label="Education" {...a11yProps(1)} />
-            <Tab className={classes.tabs} label="Work Experience" {...a11yProps(2)}  />
-            <Tab className={classes.tabs} label="Contact Me" {...a11yProps(3)} />
+        {screen.screenWidth > 700 ? 
+            <Tabs 
+                orientation="vertical"
+                value={value}
+                onChange={handleChange}
+                indicatorColor="primary"
+                //   textColor="primary"
+            >
+                <Tab className={classes.tabs} label="Technologies" {...a11yProps(0)} />
+                <Tab className={classes.tabs} label="Education" {...a11yProps(1)} />
+                <Tab className={classes.tabs} label="Work Experience" {...a11yProps(2)}  />
+                <Tab className={classes.tabs} label="Contact Me" {...a11yProps(3)} />
 
             </Tabs>
             :
             <Tabs 
-          orientation="vertical"
-          value={value}
-          onChange={handleChange}
-          indicatorColor="primary"
-        //   textColor="primary"
-        >
-    
-        {/* <Tab className={classes.tabs} label="Download Resume" {...a11yProps(0)}></Tab> */}
-        
-            <Tab className={classes.tabsMobile} label="Technologies" {...a11yProps(0)} />
-            <Tab className={classes.tabsMobile} label="Education" {...a11yProps(1)} />
-            <Tab className={classes.tabsMobile} label="Work Experience" {...a11yProps(2)}  />
-            <Tab className={classes.tabsMobile} label="Contact Me" {...a11yProps(3)} />
-        
+                orientation="vertical"
+                value={value}
+                onChange={handleChange}
+                indicatorColor="primary"
+                //textColor="primary"
+            >
+                <Tab className={classes.tabsMobile} label="Technologies" {...a11yProps(0)} />
+                <Tab className={classes.tabsMobile} label="Education" {...a11yProps(1)} />
+                <Tab className={classes.tabsMobile} label="Work Experience" {...a11yProps(2)}  />
+                <Tab className={classes.tabsMobile} label="Contact Me" {...a11yProps(3)} />
             </Tabs>
         }
-        
-       
-        {/* </Tabs> */}
-        {/* updates */}
         <Container maxWidth='lg' disableGutters>
-            {/* <TabPanel  value={value} index={0}>
-                <Grid container  justify="center" >
-                    <Box className="resumeDiv" border={3} >
-                        <Button
-                            color='primary'
-                            className={classes.buttonContainer}
-                            onClick={getResume}
-                            size="small"
-                            startIcon={<SaveIcon />}
-                            fullWidth={true}
-                            >
-                            <Typography color='primary'  variant="subtitle2" >Download Resume</Typography>
-                        </Button> 
-                    </Box> 
-                </Grid>                                
-            </TabPanel> */}
             <TabPanel value={value} index={0} >
                 {screen.screenWidth > 600 ?
                 <Grid container direction="row" justify="center" spacing={10} >
@@ -434,7 +375,7 @@ Amplify.configure({
                 :
                 <Grid container direction="row" justify="center" spacing={5} >
                     <Grid item>
-                        <Card className={classes.cardMobile} >
+                        <Card >
                             <CardContent>
                                 <Typography className={classes.titleMobile} color="textSecondary" gutterBottom>
                                     Front End
@@ -444,9 +385,6 @@ Amplify.configure({
                                     {technologiesFE.map((tech) =>
                                         <Grid item xs={6} >
                                             <ListItem  disableGutters={true}>
-                                                {/* <ListItemIcon >
-                                                    <img src={tech.svg} alt="" className={classes.devIconStyleMobile}></img>
-                                                </ListItemIcon> */}
                                                 <Typography className={classes.titleMobile}>
                                                     <ListItemText disableTypography={true} primary={tech.technology} /> 
                                                 </Typography>
@@ -459,7 +397,7 @@ Amplify.configure({
                         </Card>
                     </Grid>
                     <Grid item>
-                        <Card className={classes.cardMobile}>
+                        <Card >
                             <CardContent>
                                 <Typography className={classes.titleMobile} color="textSecondary" gutterBottom>
                                     Back End
@@ -469,9 +407,6 @@ Amplify.configure({
                                     {technologiesBE.map((tech) =>
                                         <Grid item xs={6}>
                                             <ListItem  disableGutters={true}>
-                                                {/* <ListItemIcon >
-                                                    <img src={tech.svg} alt="" className={classes.devIconStyleMobile}></img>
-                                                </ListItemIcon> */}
                                                 <Typography className={classes.titleMobile}>
                                                     <ListItemText disableTypography={true} primary={tech.technology} /> 
                                                 </Typography>
@@ -545,7 +480,7 @@ Amplify.configure({
                                 <Grid container direction='row'>
                                     <Paper className={classes.paperContainerLeft}>
                                         <Grid container justify='center' >
-                                            <Typography className={classes.description} >{job.company}</Typography>
+                                            <Typography className={classes.company} >{job.company}</Typography>
                                         </Grid>
                                     </Paper> 
                                     <Paper className={classes.paperContainerRight}>
@@ -569,12 +504,12 @@ Amplify.configure({
                 :
                 <Box > 
                     {work.map(job =>  
-                        <Box pb={2}> 
+                        <Box pb={1}> 
                             <Paper className={classes.paperContainerMobile}> 
                                 <Grid container direction='row'>
                                     <Paper className={classes.paperContainerLeftMobile}>
                                         <Grid container justify='center' >
-                                            <Typography className={classes.descriptionMobile} >{job.company}</Typography>
+                                            <Typography className={classes.companyMobile} >{job.company}</Typography>
                                         </Grid>
                                     </Paper> 
                                     <Paper className={classes.paperContainerRightMobile}>
@@ -600,45 +535,13 @@ Amplify.configure({
             </TabPanel>
             <TabPanel value={value} index={3} >
                 {screen.screenWidth > 600 ? 
-                    <Box>
-                        {/* <Grid container  justify="center" >
-                            <Box className="resumeDiv" border={3} >
-                                <Button
-                                    color='primary'
-                                    className={classes.buttonContainer}
-                                    onClick={getResume}
-                                    size="small"
-                                    startIcon={<SaveIcon />}
-                                    fullWidth={true}
-                                    >
-                                    <Typography color='primary'  variant="subtitle2" >Download Resume</Typography>
-                                </Button> 
-                            </Box> 
-                        </Grid> */}
-                        <Box pt={5}>
-                            <ResumeContact /> 
-                        </Box>
+                    <Box pt={5}>
+                        <ResumeContact /> 
                     </Box>
                     :
-                    <Box>
-                        {/* <Grid container  justify="center" >
-                            <Box className="resumeDivMobile" border={3} >
-                                <Button
-                                    color='primary'
-                                    className={classes.buttonContainer}
-                                    onClick={getResume}
-                                    size="small"
-                                    startIcon={<SaveIcon />}
-                                    fullWidth={true}
-                                    >
-                                    <Typography color='primary'  variant="subtitle2" >Download Resume</Typography>
-                                </Button> 
-                            </Box> 
-                        </Grid> */}
-                        <Box pt={5}>
-                            <ResumeContact /> 
-                        </Box> 
-                    </Box>
+                    <Box pt={1}>
+                        <ResumeContactMobile /> 
+                    </Box> 
                 }
             </TabPanel>
         </Container>
