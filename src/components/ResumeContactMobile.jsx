@@ -61,15 +61,62 @@ TextMaskCustom.propTypes = {
 };
 
 class ResumeContactMobile extends Component {
-  state = {
-    textmask: '(  )    -    ',
-  };
 
-  handleChange = name => event => {
-    this.setState({
-      [name]: event.target.value,
-    });
-  };
+  constructor(props) {
+    super(props)
+    this.state = {
+        textmask: '(  )    -    ',
+        firstName: '',
+        lastName: '',
+        organization: '',
+        positionAvailable: '',
+        phoneNumber: '',
+        emailAddress: '',
+        message: '',
+    }
+}
+
+  contactRequestInfo = (e) => {
+    switch(e.target.id) {
+        case 'firstName':
+            return this.setState({firstName: e.target.value});
+        case 'lastName':
+            return this.setState({lastName: e.target.value});
+        case 'organization':
+            return this.setState({organization: e.target.value});
+        case 'positionAvailable':
+            return this.setState({positionAvailable: e.target.value});
+        case 'emailAddress':
+            return this.setState({emailAddress: e.target.value});
+        case 'message':
+            return this.setState({message: e.target.value});
+        default:
+            return '';
+    }
+};
+
+send = () => {
+    const contactInfo = {'id': Date.now(),'firstName': this.state.firstName, 'lastName': this.state.lastName, 
+    'organization': this.state.organization,
+    'position' : this.state.positionAvailable, 'phone': this.state.phoneNumber, 
+    'email': this.state.emailAddress, 'message': this.state.message}
+    console.log(contactInfo)
+};
+
+navToGitHub = () => {  
+    window.open("https://github.com/ryannHippen", "_blank")
+}  
+
+navToLinkedIn = () => {  
+    window.open("https://www.linkedin.com/in/ryann-hippen-078334167", "_blank")
+}  
+
+handleChange = name => e => {
+  this.setState({
+    [name]: e.target.value,
+    phoneNumber: e.target.value,
+  });
+};
 
   render() {
 
@@ -118,7 +165,7 @@ class ResumeContactMobile extends Component {
                 <Grid item>
                     <TextField
                         required
-                        id="standard-required"
+                        id="firstName"
                         label="First Name"
                         defaultValue=""
                         style={styles.textField}
@@ -126,10 +173,11 @@ class ResumeContactMobile extends Component {
                         size="small"
                         InputLabelProps={{ style: { fontSize: 13 } }}
                         InputProps={{ style: { fontSize: 12, color: 'white' } }}
+                        onChange= {this.contactRequestInfo}
                     />
                     <TextField
                         required
-                        id="standard-required"
+                        id="lastName"
                         label="Last Name"
                         defaultValue=""
                         style={styles.textField}
@@ -137,12 +185,13 @@ class ResumeContactMobile extends Component {
                         size="small"
                         InputLabelProps={{ style: { fontSize: 13 } }}
                         InputProps={{ style: { fontSize: 12, color: 'white' } }}
+                        onChange= {this.contactRequestInfo}
                     />
                 </Grid>
                 <Grid item>
                     <TextField
                         required
-                        id="standard-required"
+                        id="organization"
                         label="Organization"
                         defaultValue=""
                         style={styles.singleLineTextField}
@@ -150,11 +199,12 @@ class ResumeContactMobile extends Component {
                         size="small"
                         InputLabelProps={{ style: { fontSize: 13 } }}
                         InputProps={{ style: { fontSize: 12, color: 'white' } }}
+                        onChange= {this.contactRequestInfo}
                     />
                 </Grid>
                 <Grid item>
                     <TextField
-                        id="standard-name"
+                        id="positionAvailable"
                         label="Position Available"
                         defaultValue=""
                         style={styles.singleLineTextField}
@@ -162,11 +212,12 @@ class ResumeContactMobile extends Component {
                         size="small"
                         InputLabelProps={{ style: { fontSize: 13 } }}
                         InputProps={{ style: { fontSize: 12, color: 'white' } }}
+                        onChange= {this.contactRequestInfo}
                     />
                 </Grid>
                 <Grid item>
                     <TextField
-                        id="standard-name"
+                        id="phoneNumber"
                         label="Phone"
                         defaultValue=""
                         style={styles.textField}
@@ -181,7 +232,7 @@ class ResumeContactMobile extends Component {
                         }}
                     />
                     <TextField
-                        id="standard-name"
+                        id="emailAddress"
                         label="Email"
                         defaultValue=""
                         style={styles.textField}
@@ -189,11 +240,12 @@ class ResumeContactMobile extends Component {
                         size="small"
                         InputLabelProps={{ style: { fontSize: 13 } }}
                         InputProps={{ style: { fontSize: 12, color: 'white' } }}
+                        onChange= {this.contactRequestInfo}
                     />
                 </Grid>
                 <Grid item>
                     <TextField
-                        id="standard-name"
+                        id="message"
                         label="Message"
                         multiline
                         defaultValue=""
@@ -205,13 +257,14 @@ class ResumeContactMobile extends Component {
                         rows={10}
                         InputLabelProps={{ style: { fontSize: 13 } }}
                         InputProps={{ style: { fontSize: 12, color: 'white' } }}
+                        onChange= {this.contactRequestInfo}
                     />
                 </Grid>
             </Grid>
             <Box pt={3} pb={5}>
                     <Grid container direction="column" justify="center" alignItems="center" >
                         <Box pb={2}>
-                            <Button size="small">
+                            <Button size="small" onClick={ () => { this.send() }}>
                                 <Typography variant="outlined" color="primary" style={styles.sendText}>Send</Typography>
                             </Button>
                         </Box>
