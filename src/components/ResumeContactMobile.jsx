@@ -8,6 +8,7 @@ import GitHub from '@material-ui/icons/GitHub'
 import Amplify, { Storage } from 'aws-amplify';
 import config from '../ampconfig';
 import SaveIcon from '@material-ui/icons/Save';
+import AwsDynamoApi from '../services/awsDynamo'
 
 Amplify.configure({
     Auth: {
@@ -66,13 +67,13 @@ class ResumeContactMobile extends Component {
     super(props)
     this.state = {
         textmask: '(  )    -    ',
-        firstName: '',
-        lastName: '',
-        organization: '',
-        positionAvailable: '',
-        phoneNumber: '',
-        emailAddress: '',
-        message: '',
+        firstName: null,
+        lastName: null,
+        organization: null,
+        positionAvailable: null,
+        phoneNumber: null,
+        emailAddress: null,
+        message: null,
     }
 }
 
@@ -95,12 +96,26 @@ class ResumeContactMobile extends Component {
     }
 };
 
+emailValidation = (e) => {
+  const email = e.target.value;
+  if(email.includes('@') && email.includes('.com')){
+    alert('email input correctly')
+  } else  {
+    alert('email is not in correct format, or is not filled out completely, please update')
+  } 
+      
+};
+
 send = () => {
     const contactInfo = {'id': Date.now(),'firstName': this.state.firstName, 'lastName': this.state.lastName, 
     'organization': this.state.organization,
     'position' : this.state.positionAvailable, 'phone': this.state.phoneNumber, 
     'email': this.state.emailAddress, 'message': this.state.message}
-    console.log(contactInfo)
+
+    AwsDynamoApi.postRequest(contactInfo).then((response) => {
+      console.log(response)
+    })
+
 };
 
 navToGitHub = () => {  
@@ -176,7 +191,6 @@ handleChange = name => e => {
                         onChange= {this.contactRequestInfo}
                     />
                     <TextField
-                        required
                         id="lastName"
                         label="Last Name"
                         defaultValue=""
@@ -232,6 +246,7 @@ handleChange = name => e => {
                         }}
                     />
                     <TextField
+                        required
                         id="emailAddress"
                         label="Email"
                         defaultValue=""
@@ -241,6 +256,7 @@ handleChange = name => e => {
                         InputLabelProps={{ style: { fontSize: 13 } }}
                         InputProps={{ style: { fontSize: 12, color: 'white' } }}
                         onChange= {this.contactRequestInfo}
+                        onBlur= {this.emailValidation}
                     />
                 </Grid>
                 <Grid item>

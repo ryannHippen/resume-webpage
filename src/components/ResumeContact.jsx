@@ -9,7 +9,7 @@ import GitHub from '@material-ui/icons/GitHub'
 import Amplify, { Storage } from 'aws-amplify';
 import config from '../ampconfig';
 import SaveIcon from '@material-ui/icons/Save';
-
+import AwsDynamoApi from '../services/awsDynamo'
 
 Amplify.configure({
     Auth: {
@@ -90,41 +90,81 @@ class ResumeContact extends Component{
     constructor(props) {
         super(props)
         this.state = {
-            firstName: '',
-            lastName: '',
-            organization: '',
-            positionAvailable: '',
-            phoneNumber: '',
-            emailAddress: '',
-            message: '',
+            firstName: null,
+            lastName: null,
+            organization: null,
+            positionAvailable: null,
+            phoneNumber: null,
+            emailAddress: null,
+            message: null,
+            emailValidated: true,
+            ableToSendToDB: true,
         }
     }
 
     contactRequestInfo = (e) => {
         switch(e.target.id) {
             case 'firstName':
-                return this.setState({firstName: e.target.value});
+                this.setState({firstName: e.target.value});
+                if((this.state.emailAddress !== null  && this.state.organization !== null && this.state.firstName !== null) && 
+                this.state.emailAddress !== ''  && this.state.organization !== '' && this.state.firstName !== '') {
+                    this.setState({ ableToSendToDB: true })
+                } else {
+                    this.setState({ ableToSendToDB: false })
+                }
+                break;
             case 'lastName':
-                return this.setState({lastName: e.target.value});
+                this.setState({lastName: e.target.value});
+                break;
             case 'organization':
-                return this.setState({organization: e.target.value});
+                this.setState({organization: e.target.value});
+                if((this.state.emailAddress !== null  && this.state.organization !== null && this.state.firstName !== null) && 
+                this.state.emailAddress !== ''  && this.state.organization !== '' && this.state.firstName !== '') {
+                    this.setState({ ableToSendToDB: true })
+                } else {
+                    this.setState({ ableToSendToDB: false })
+                }
+                break;
             case 'positionAvailable':
-                return this.setState({positionAvailable: e.target.value});
+                this.setState({positionAvailable: e.target.value});
             case 'emailAddress':
-                return this.setState({emailAddress: e.target.value});
+                this.setState({emailAddress: e.target.value});
+                if((this.state.emailAddress !== null  && this.state.organization !== null && this.state.firstName !== null) && 
+                this.state.emailAddress !== ''  && this.state.organization !== '' && this.state.firstName !== '') {
+                    this.setState({ ableToSendToDB: true })
+                } else {
+                    this.setState({ ableToSendToDB: false })
+                }
+                break;
             case 'message':
-                return this.setState({message: e.target.value});
+                this.setState({message: e.target.value});
+                break;
             default:
-                return '';
+                break;
         }
     };
 
-    send = () => {
-        const contactInfo = {'id': Date.now(),'firstName': this.state.firstName, 'lastName': this.state.lastName, 
-        'organization': this.state.organization,
-        'position' : this.state.positionAvailable, 'phone': this.state.phoneNumber, 
-        'email': this.state.emailAddress, 'message': this.state.message}
-        console.log(contactInfo)
+    emailValidation = (e) => {
+        const email = e.target.value;
+        if(email.includes('@') && email.includes('.com')){
+        this.setState({ emailValidated: true })
+        } else  {
+          this.setState({ emailValidated: false })
+        } 
+      };
+
+    send = () => { 
+        if(this.state.firstName !== null && this.state.organization !== null && this.state.emailAddress !== null && this.state.emailValidated === true){
+            this.setState({ ableToSendToDB: true })
+            const contactInfo = {'id': Date.now(),'firstName': this.state.firstName, 'lastName': this.state.lastName, 
+            'organization': this.state.organization,
+            'position' : this.state.positionAvailable, 'phone': this.state.phoneNumber, 
+            'email': this.state.emailAddress, 'message': this.state.message}
+            AwsDynamoApi.postRequest(contactInfo)
+
+        } else if (this.state.firstName === null && this.state.organization === null && this.state.emailAddress === null){
+            this.setState({ ableToSendToDB: false })
+        }
     };
 
     navToGitHub = () => {  
@@ -196,7 +236,6 @@ class ResumeContact extends Component{
                             onChange= {this.contactRequestInfo}
                         />
                         <TextField
-                            required
                             id="lastName"
                             label="Last Name"
                             defaultValue=""
@@ -244,6 +283,7 @@ class ResumeContact extends Component{
                             }}
                         />
                         <TextField
+                            required
                             id="emailAddress"
                             label="Email Address"
                             defaultValue=""
@@ -251,7 +291,18 @@ class ResumeContact extends Component{
                             margin="normal"
                             InputProps={{ style: { color: 'white' } }}
                             onChange= {this.contactRequestInfo}
+                            onBlur= {this.emailValidation}
                         />
+                    </Grid>
+                    <Grid item hidden={this.state.emailValidated}>
+                        <Box pt={1}>
+                            <Typography color="secondary">Email is not correctly formatted or empty</Typography>
+                        </Box>
+                    </Grid>
+                    <Grid item hidden={this.state.ableToSendToDB}>
+                        <Box pt={1}>
+                            <Typography color="secondary">Please fill out all required fields indicated, by an *</Typography>
+                        </Box>
                     </Grid>
                     <Grid item>
                         <TextField
