@@ -74,48 +74,65 @@ class ResumeContactMobile extends Component {
         phoneNumber: null,
         emailAddress: null,
         message: null,
+        emailValidated: true,
+        ableToSendToDB: true,
     }
 }
 
-  contactRequestInfo = (e) => {
-    switch(e.target.id) {
-        case 'firstName':
-            return this.setState({firstName: e.target.value});
-        case 'lastName':
-            return this.setState({lastName: e.target.value});
-        case 'organization':
-            return this.setState({organization: e.target.value});
-        case 'positionAvailable':
-            return this.setState({positionAvailable: e.target.value});
-        case 'emailAddress':
-            return this.setState({emailAddress: e.target.value});
-        case 'message':
-            return this.setState({message: e.target.value});
-        default:
-            return '';
-    }
+contactRequestInfo = (e) => {
+  switch(e.target.id) {
+      case 'firstName':
+          this.setState({firstName: e.target.value});
+          break;
+      case 'lastName':
+          this.setState({lastName: e.target.value});
+          break;
+      case 'organization':
+          this.setState({organization: e.target.value});
+          break;
+      case 'positionAvailable':
+          this.setState({positionAvailable: e.target.value});
+      case 'emailAddress':
+          this.setState({emailAddress: e.target.value});
+          break;
+      case 'message':
+          this.setState({message: e.target.value});
+          break;
+      default:
+          break;
+  }
+};
+
+requiredFieldsCheck = (e) => {
+  if((this.state.emailAddress !== null  && this.state.organization !== null && this.state.firstName !== null) && 
+  this.state.emailAddress !== ''  && this.state.organization !== '' && this.state.firstName !== '') {
+      this.setState({ ableToSendToDB: true })
+  } else {
+      this.setState({ ableToSendToDB: false })
+  }
 };
 
 emailValidation = (e) => {
   const email = e.target.value;
   if(email.includes('@') && email.includes('.com')){
-    alert('email input correctly')
+  this.setState({ emailValidated: true })
   } else  {
-    alert('email is not in correct format, or is not filled out completely, please update')
+    this.setState({ emailValidated: false })
   } 
-      
 };
 
-send = () => {
-    const contactInfo = {'id': Date.now(),'firstName': this.state.firstName, 'lastName': this.state.lastName, 
-    'organization': this.state.organization,
-    'position' : this.state.positionAvailable, 'phone': this.state.phoneNumber, 
-    'email': this.state.emailAddress, 'message': this.state.message}
+send = () => { 
+  if(this.state.firstName !== null && this.state.organization !== null && this.state.emailAddress !== null && this.state.emailValidated === true){
+      this.setState({ ableToSendToDB: true })
+      const contactInfo = {'id': Date.now(),'firstName': this.state.firstName, 'lastName': this.state.lastName, 
+      'organization': this.state.organization,
+      'position' : this.state.positionAvailable, 'phone': this.state.phoneNumber, 
+      'email': this.state.emailAddress, 'message': this.state.message}
+      AwsDynamoApi.postRequest(contactInfo)
 
-    AwsDynamoApi.postRequest(contactInfo).then((response) => {
-      console.log(response)
-    })
-
+  } else if (this.state.firstName === null && this.state.organization === null && this.state.emailAddress === null){
+      this.setState({ ableToSendToDB: false })
+  }
 };
 
 navToGitHub = () => {  
@@ -162,7 +179,10 @@ handleChange = name => e => {
         },
         sendText: {
           fontSize: 12,
-        }
+        },
+        hiddenText: {
+          fontSize: 10,
+        },
       };
 
     const getResume = () => {  
@@ -189,6 +209,7 @@ handleChange = name => e => {
                         InputLabelProps={{ style: { fontSize: 13 } }}
                         InputProps={{ style: { fontSize: 12, color: 'white' } }}
                         onChange= {this.contactRequestInfo}
+                        onBlur={this.requiredFieldsCheck}
                     />
                     <TextField
                         id="lastName"
@@ -214,6 +235,7 @@ handleChange = name => e => {
                         InputLabelProps={{ style: { fontSize: 13 } }}
                         InputProps={{ style: { fontSize: 12, color: 'white' } }}
                         onChange= {this.contactRequestInfo}
+                        onBlur={this.requiredFieldsCheck}
                     />
                 </Grid>
                 <Grid item>
@@ -259,6 +281,16 @@ handleChange = name => e => {
                         onBlur= {this.emailValidation}
                     />
                 </Grid>
+                <Grid item hidden={this.state.emailValidated}>
+                        <Box pt={1}>
+                            <Typography style={styles.hiddenText} color="secondary">Email is not correctly formatted or empty</Typography>
+                        </Box>
+                    </Grid>
+                    <Grid item hidden={this.state.ableToSendToDB}>
+                        <Box pt={1}>
+                            <Typography style={styles.hiddenText} color="secondary">Please fill out all required fields</Typography>
+                        </Box>
+                    </Grid>
                 <Grid item>
                     <TextField
                         id="message"
@@ -277,7 +309,7 @@ handleChange = name => e => {
                     />
                 </Grid>
             </Grid>
-            <Box pt={3} pb={5}>
+            <Box pt={0} pb={0}>
                     <Grid container direction="column" justify="center" alignItems="center" >
                         <Box pb={2}>
                             <Button size="small" onClick={ () => { this.send() }}>
@@ -291,7 +323,7 @@ handleChange = name => e => {
                         </Box>
                     </Grid>
                 </Box>
-            <Box pt={1}>
+            <Box pt={3}>
               <BottomNavigation style={styles.bottomNavigationContainer}>  
                   <Tooltip title="My GitHub Homepage">
                       <Button onClick={this.navToGitHub} size="small">

@@ -8,6 +8,8 @@ import styled from "styled-components";
 import { connect } from 'react-redux';
 import compose from 'recompose/compose'
 import Screensize from './ScreenSize'
+import LogoNotSelected from '../icons/LOGO - NOT SELECTED.png'
+import LogoSelected from '../icons/LOGO - SELECTED.png'
 
 const muiTheme = createMuiTheme({
     palette: {
@@ -32,30 +34,24 @@ const styles = theme => ({
         boxShadow: "None",
         overflow: 'hidden',
         
-    }
+    },
+    logo: {
+        marginTop: '-15px',
+        height: "10vh",
+        margin: "auto",
+        marginBottom: '-15px',
+        marginLeft: '-15px',
+        marginRight: '-15px',
+    },
+    logoMobile: {
+        height: "7vh",
+    },
   });
-  //background-color: #f5f5f5;
+  
   const Wrapper = styled.div`
   min-height: 8vh;
   display: flex;
   align-items: center;
-  
-
-  ul {
-    margin: 0;
-    padding: 0;
-  }
-
-  li {
-    display: inline-block;
-    margin-left: 20px;
-
-    a {
-      text-decoration: none;
-      font-size: 20px;
-      color: #333;
-    }
-  }
 `;
 
 
@@ -72,6 +68,7 @@ class NavBar extends Component{
             colorProjects: 'secondary',
             colorResume: 'secondary',
             colorContact: 'secondary',
+            logoSelected: true,
 
         }
         this.navToAbout = this.navToAbout.bind(this);
@@ -79,6 +76,21 @@ class NavBar extends Component{
         this.navToContact = this.navToContact.bind(this);
         this.navToProjects = this.navToProjects.bind(this);
         this.navToResumeVert = this.navToResumeVert.bind(this);
+    }
+
+    navToHome(){
+        if (this.state.currentPage !== 'home'){
+            this.setState({
+                currentPage: 'home',
+                colorAbout:'secondary',
+                colorHome: 'secondary',
+                colorProjects: 'secondary',
+                colorResume: 'secondary',
+                colorContact: 'secondary',
+                logoSelected: true,
+            })
+            this.props.history.push(`/`);
+        }
     }
 
     navToAbout(){
@@ -90,6 +102,7 @@ class NavBar extends Component{
                 colorProjects: 'secondary',
                 colorResume: 'secondary',
                 colorContact: 'secondary',
+                logoSelected: false,
             })
             this.props.history.push(`/about`);
         }
@@ -104,6 +117,7 @@ class NavBar extends Component{
                 colorProjects: 'secondary',
                 colorResume: 'primary',
                 colorContact: 'secondary',
+                logoSelected: false,
             })
             this.props.history.push(`/resume`);
         }
@@ -118,6 +132,7 @@ class NavBar extends Component{
                 colorProjects: 'secondary',
                 colorResume: 'secondary',
                 colorContact: 'primary',
+                logoSelected: false,
             })
             this.props.history.push(`/contact`);
         }
@@ -132,6 +147,7 @@ class NavBar extends Component{
                 colorProjects: 'primary',
                 colorResume: 'secondary',
                 colorContact: 'secondary',
+                logoSelected: false,
             })
             this.props.history.push(`/projects`);
         }
@@ -151,68 +167,80 @@ class NavBar extends Component{
                 <AppBar position="" className={classes.appBarBackground} >
                     <Toolbar>
                         {this.props.screen.screenWidth > 700 ?
-                        <Grid container direction="row" justify="center" spacing={4}>
-                        <Grid item >
-                            <ButtonBase disableRipple type="button"  onClick= {() => { this.navToAbout() }}>
-                                <Typography className="navBarText" color={this.state.colorAbout} >
-                                    <span className="navBarText">ABOUT</span>
-                                </Typography>
-                            </ButtonBase>
-                        </Grid>
-                        <Grid item >
-                            <ButtonBase disableRipple type="button"  onClick= {() => { this.navToResume() }}>
-                                <Typography className="navBarText" color={this.state.colorResume}>
-                                    <span className="navBarText">RESUME</span>
-                                </Typography>
-                            </ButtonBase>
-                        </Grid>
-                        <Grid item >
-                            <ButtonBase disableRipple type="button" onClick= {() => { this.navToProjects() }}>
-                                <Typography className="navBarText" color={this.state.colorProjects}>
-                                    <span className="navBarText">PROJECTS</span>
-                                </Typography>
-                            </ButtonBase>
-                        </Grid>
-                        <Grid item >
-                            <ButtonBase disableRipple type="button"  onClick= {() => { this.navToContact() }}>
-                                <Typography className="navBarText" color={this.state.colorContact}>
-                                    <span className="navBarText">CONTACT</span>
-                                </Typography>
-                            </ButtonBase>
-                        </Grid>
-                    </Grid>
-                        :
-                        <Grid container direction="row" justify="center" spacing={0}>
+                        <Grid container direction="row" alignItems="center" justify="center" spacing={4}>
                             <Grid item >
-                            
-                            <ButtonBase disableRipple type="button"  onClick= {() => { this.navToAbout() }}>
-                                <Typography className="navBarText" color={this.state.colorAbout} >
-                                    <span className="navBarTextMobile">ABOUT</span>
-                                </Typography>
-                            </ButtonBase>
+                                <ButtonBase disableRipple type="button"  onClick= {() => { this.navToAbout() }}>
+                                    <Typography className="navBarText" color={this.state.colorAbout} >
+                                        <span className="navBarText">ABOUT</span>
+                                    </Typography>
+                                </ButtonBase>
+                            </Grid>
+                            <Grid item >
+                                <ButtonBase disableRipple type="button" onClick= {() => { this.navToProjects() }}>
+                                    <Typography className="navBarText" color={this.state.colorProjects}>
+                                        <span className="navBarText">PROJECTS</span>
+                                    </Typography>
+                                </ButtonBase>
+                            </Grid>
+                            <Grid item >
+                                <ButtonBase  disableRipple type="button"  onClick= {() => { this.navToHome() }}>
+                                    <img hidden={this.state.logoSelected} src={LogoNotSelected} alt="" className={classes.logo}></img>
+                                    <img hidden={!this.state.logoSelected} src={LogoSelected} alt="" className={classes.logo}></img>
+                                </ButtonBase>
+                            </Grid>
+                            <Grid item >
+                                <ButtonBase disableRipple type="button"  onClick= {() => { this.navToResume() }}>
+                                    <Typography className="navBarText" color={this.state.colorResume}>
+                                        <span className="navBarText">RESUME</span>
+                                    </Typography>
+                                </ButtonBase>
+                            </Grid>
+                            <Grid item >
+                                <ButtonBase disableRipple type="button"  onClick= {() => { this.navToContact() }}>
+                                    <Typography className="navBarText" color={this.state.colorContact}>
+                                        <span className="navBarText">CONTACT</span>
+                                    </Typography>
+                                </ButtonBase>
+                            </Grid>
                         </Grid>
-                        <Grid item >
-                            <ButtonBase disableRipple type="button"  onClick= {() => { this.navToResume() }}>
-                                <Typography className="navBarText" color={this.state.colorResume}>
-                                    <span className="navBarTextMobile">RESUME</span>
-                                </Typography>
-                            </ButtonBase>
-                        </Grid>
-                        <Grid item >
-                            <ButtonBase disableRipple type="button" onClick= {() => { this.navToProjects() }}>
-                                <Typography className="navBarText" color={this.state.colorProjects}>
-                                    <span className="navBarTextMobile">PROJECTS</span>
-                                </Typography>
-                            </ButtonBase>
-                        </Grid>
-                        <Grid item >
-                            <ButtonBase disableRipple type="button"  onClick= {() => { this.navToContact() }}>
-                                <Typography className="navBarText" color={this.state.colorContact}>
-                                    <span className="navBarTextMobile">CONTACT</span>
-                                </Typography>
-                            </ButtonBase>
-                        </Grid>
-                            
+
+                        :
+
+                        <Grid container direction="row" alignItems="center" justify="center" spacing={0}>
+                            <Grid item >
+                                <ButtonBase disableRipple type="button"  onClick= {() => { this.navToAbout() }}>
+                                    <Typography className="navBarText" color={this.state.colorAbout} >
+                                        <span className="navBarTextMobile">ABOUT</span>
+                                    </Typography>
+                                </ButtonBase>
+                            </Grid>
+                            <Grid item >
+                                <ButtonBase disableRipple type="button" onClick= {() => { this.navToProjects() }}>
+                                    <Typography className="navBarText" color={this.state.colorProjects}>
+                                        <span className="navBarTextMobile">PROJECTS</span>
+                                    </Typography>
+                                </ButtonBase>
+                            </Grid>
+                            <Grid item >
+                                <ButtonBase  disableRipple type="button"  onClick= {() => { this.navToHome() }}>
+                                    <img hidden={this.state.logoSelected} src={LogoNotSelected} alt="" className={classes.logoMobile}></img>
+                                    <img hidden={!this.state.logoSelected} src={LogoSelected} alt="" className={classes.logoMobile}></img>
+                                </ButtonBase>
+                            </Grid>
+                            <Grid item >
+                                <ButtonBase disableRipple type="button"  onClick= {() => { this.navToResume() }}>
+                                    <Typography className="navBarText" color={this.state.colorResume}>
+                                        <span className="navBarTextMobile">RESUME</span>
+                                    </Typography>
+                                </ButtonBase>
+                            </Grid>
+                            <Grid item >
+                                <ButtonBase disableRipple type="button"  onClick= {() => { this.navToContact() }}>
+                                    <Typography className="navBarText" color={this.state.colorContact}>
+                                        <span className="navBarTextMobile">CONTACT</span>
+                                    </Typography>
+                                </ButtonBase>
+                            </Grid>
                         </Grid>
                         }
                     </Toolbar>

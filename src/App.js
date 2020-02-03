@@ -55,41 +55,29 @@ class App extends Component {
     Storage.put(this.state.fileName, this.state.file).then(() => {
       alert('successfully saved file!')
       this.setState({ uploadfileUrl: '', file: '', fileName: ''})
-      
     })
     .catch(err => {
       alert('error uploading file', err)
     })
   }
 
-  
-
   render() {
     
-
     const styles = {
       paperContainer: {
-            // backgroundImage: `url(${this.state.downloadFileUrl})`,
-            height: '100vh',
-            width: '100vw',
-            // backgroundSize: 'cover',
-            // backgroundRepeat: 'no-repeat',
-            overflowX: 'hidden',
-            overflowY: 'hidden',
-            backgroundColor: '#FCF8D2'
-            // backgroundColor: '#606060'
+          height: '100vh',
+          width: '100vw',
+          overflowX: 'hidden',
+          overflowY: 'hidden',
+          backgroundColor: '#FCF8D2'
       }
     };
 
     return (
       <Router>
         <div className="">
-          {/* <NavBar/> */}
           <MuiThemeProvider theme={muiTheme}>
-            
             <Paper style={styles.paperContainer}>
-                {/* <input type='file' onChange= {this.handelChange} />
-                <button onClick={this.saveFile}> Save File</button> */}
                 <Routes  />
             </Paper>
           </MuiThemeProvider>        
@@ -98,6 +86,5 @@ class App extends Component {
     );
   }
 }
-
 
 export default App;

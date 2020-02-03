@@ -106,41 +106,32 @@ class ResumeContact extends Component{
         switch(e.target.id) {
             case 'firstName':
                 this.setState({firstName: e.target.value});
-                if((this.state.emailAddress !== null  && this.state.organization !== null && this.state.firstName !== null) && 
-                this.state.emailAddress !== ''  && this.state.organization !== '' && this.state.firstName !== '') {
-                    this.setState({ ableToSendToDB: true })
-                } else {
-                    this.setState({ ableToSendToDB: false })
-                }
                 break;
             case 'lastName':
                 this.setState({lastName: e.target.value});
                 break;
             case 'organization':
                 this.setState({organization: e.target.value});
-                if((this.state.emailAddress !== null  && this.state.organization !== null && this.state.firstName !== null) && 
-                this.state.emailAddress !== ''  && this.state.organization !== '' && this.state.firstName !== '') {
-                    this.setState({ ableToSendToDB: true })
-                } else {
-                    this.setState({ ableToSendToDB: false })
-                }
                 break;
             case 'positionAvailable':
                 this.setState({positionAvailable: e.target.value});
             case 'emailAddress':
                 this.setState({emailAddress: e.target.value});
-                if((this.state.emailAddress !== null  && this.state.organization !== null && this.state.firstName !== null) && 
-                this.state.emailAddress !== ''  && this.state.organization !== '' && this.state.firstName !== '') {
-                    this.setState({ ableToSendToDB: true })
-                } else {
-                    this.setState({ ableToSendToDB: false })
-                }
                 break;
             case 'message':
                 this.setState({message: e.target.value});
                 break;
             default:
                 break;
+        }
+    };
+
+    requiredFieldsCheck = (e) => {
+        if((this.state.emailAddress !== null  && this.state.organization !== null && this.state.firstName !== null) && 
+        this.state.emailAddress !== ''  && this.state.organization !== '' && this.state.firstName !== '') {
+            this.setState({ ableToSendToDB: true })
+        } else {
+            this.setState({ ableToSendToDB: false })
         }
     };
 
@@ -202,8 +193,6 @@ class ResumeContact extends Component{
                 width: 200,
             },
             singleLineTextField: {
-                // marginLeft: '7px',
-                // marginRight: '7px',
                 width: 414,
             },
             buttonContainer: {
@@ -234,6 +223,7 @@ class ResumeContact extends Component{
                             margin="normal"
                             InputProps={{ style: { color: 'white' } }}
                             onChange= {this.contactRequestInfo}
+                            onBlur={this.requiredFieldsCheck}
                         />
                         <TextField
                             id="lastName"
@@ -255,6 +245,7 @@ class ResumeContact extends Component{
                             margin="normal"
                             InputProps={{ style: { color: 'white' } }}
                             onChange= {this.contactRequestInfo}
+                             
                         />
                     </Grid>
                     <Grid item>

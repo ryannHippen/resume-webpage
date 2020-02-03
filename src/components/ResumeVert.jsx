@@ -215,6 +215,11 @@ Amplify.configure({
         overflow: 'auto',
         padding: '3px',
     },
+    paperContainerContact: {
+        backgroundColor: 'transparent',
+        boxShadow: 'none',
+        maxHeight: '80vh',
+    },
     buttonContainer: {
         backgroundColor: 'transparent',
     },
@@ -304,7 +309,7 @@ Amplify.configure({
                 <Tab className={classes.tabs} label="Technologies" {...a11yProps(0)} />
                 <Tab className={classes.tabs} label="Education" {...a11yProps(1)} />
                 <Tab className={classes.tabs} label="Work Experience" {...a11yProps(2)}  />
-                <Tab className={classes.tabs} label="Contact Me" {...a11yProps(3)} />
+                {/* <Tab className={classes.tabs} label="Contact Me" {...a11yProps(3)} /> */}
 
             </Tabs>
             :
@@ -318,7 +323,7 @@ Amplify.configure({
                 <Tab className={classes.tabsMobile} label="Technologies" {...a11yProps(0)} />
                 <Tab className={classes.tabsMobile} label="Education" {...a11yProps(1)} />
                 <Tab className={classes.tabsMobile} label="Work Experience" {...a11yProps(2)}  />
-                <Tab className={classes.tabsMobile} label="Contact Me" {...a11yProps(3)} />
+                {/* <Tab className={classes.tabsMobile} label="Contact Me" {...a11yProps(3)} /> */}
             </Tabs>
         }
         <Container maxWidth='lg' disableGutters>
@@ -533,17 +538,19 @@ Amplify.configure({
                 }
                 
             </TabPanel>
-            <TabPanel value={value} index={3} >
+            {/* <TabPanel value={value} index={3} >
                 {screen.screenWidth > 600 ? 
                     <Box pt={5}>
                         <ResumeContact /> 
                     </Box>
                     :
-                    <Box pt={1}>
-                        <ResumeContactMobile /> 
-                    </Box> 
+                    <Paper className={classes.paperContainerContact}>
+                        <Box>
+                            <ResumeContactMobile /> 
+                        </Box> 
+                    </Paper>
                 }
-            </TabPanel>
+            </TabPanel> */}
         </Container>
     </div>
     </MuiThemeProvider>
