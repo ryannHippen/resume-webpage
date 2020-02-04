@@ -2,13 +2,19 @@ import React, { Component } from 'react';
 import MaskedInput from 'react-text-mask';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
-import { Paper, BottomNavigation, Grid, Button, TextField, Tooltip, Box, Typography, Divider } from '@material-ui/core';
+import { Paper, BottomNavigation, Grid, Button, TextField, 
+    Tooltip, Box, Typography, Divider, Snackbar } from '@material-ui/core';
 import LinkedIn from '@material-ui/icons/LinkedIn'
 import GitHub from '@material-ui/icons/GitHub'
 import Amplify, { Storage } from 'aws-amplify';
 import config from '../ampconfig';
 import SaveIcon from '@material-ui/icons/Save';
 import AwsDynamoApi from '../services/awsDynamo'
+import MuiAlert from '@material-ui/lab/Alert';
+
+function Alert(props) {
+  return <MuiAlert elevation={6} variant="filled" {...props} />;
+}
 
 Amplify.configure({
     Auth: {
@@ -76,6 +82,7 @@ class ResumeContactMobile extends Component {
         message: null,
         emailValidated: true,
         ableToSendToDB: true,
+        openSnackBar: false,
     }
 }
 
@@ -92,6 +99,7 @@ contactRequestInfo = (e) => {
           break;
       case 'positionAvailable':
           this.setState({positionAvailable: e.target.value});
+          break;
       case 'emailAddress':
           this.setState({emailAddress: e.target.value});
           break;
@@ -113,6 +121,7 @@ requiredFieldsCheck = (e) => {
 };
 
 emailValidation = (e) => {
+  this.requiredFieldsCheck()
   const email = e.target.value;
   if(email.includes('@') && email.includes('.com')){
   this.setState({ emailValidated: true })
@@ -129,6 +138,19 @@ send = () => {
       'position' : this.state.positionAvailable, 'phone': this.state.phoneNumber, 
       'email': this.state.emailAddress, 'message': this.state.message}
       AwsDynamoApi.postRequest(contactInfo)
+      this.setState({ 
+        openSnackBar: true, 
+        firstName: '',
+        lastName: '',
+        organization: '',
+        positionAvailable: '',
+        phoneNumber: '',
+        emailAddress: '',
+        message: '',
+        emailValidated: true,
+        ableToSendToDB: true,
+        textmask: '',
+    })
 
   } else if (this.state.firstName === null && this.state.organization === null && this.state.emailAddress === null){
       this.setState({ ableToSendToDB: false })
@@ -183,16 +205,21 @@ handleChange = name => e => {
         hiddenText: {
           fontSize: 10,
         },
+        snackBarColor: {
+            backgroundColor: '#FCF8D2',
+            color: 'black',
+            marginBottom: '10vh',
+        }
       };
 
     const getResume = () => {  
-        // Storage.get('Ryann Hippen - Resume.pdf').then(data => {
-        //     window.open(data, "_blank")
-        // })
-        // .catch(err => {
-        //     console.log('error downloading resume')
-        // })
-        window.open('', "_blank")
+        Storage.get('Ryann Hippen - Resume.pdf').then(data => {
+            window.open(data, "_blank")
+        })
+        .catch(err => {
+            console.log('error downloading resume')
+        })
+        // window.open('', "_blank")
     };  
     return (
         <Paper style={styles.paperContainer}>
@@ -203,6 +230,7 @@ handleChange = name => e => {
                         id="firstName"
                         label="First Name"
                         defaultValue=""
+                        value={this.state.firstName}
                         style={styles.textField}
                         margin="normal"
                         size="small"
@@ -215,6 +243,7 @@ handleChange = name => e => {
                         id="lastName"
                         label="Last Name"
                         defaultValue=""
+                        value={this.state.lastName}
                         style={styles.textField}
                         margin="normal"
                         size="small"
@@ -229,6 +258,7 @@ handleChange = name => e => {
                         id="organization"
                         label="Organization"
                         defaultValue=""
+                        value={this.state.organization}
                         style={styles.singleLineTextField}
                         margin="normal"
                         size="small"
@@ -243,6 +273,7 @@ handleChange = name => e => {
                         id="positionAvailable"
                         label="Position Available"
                         defaultValue=""
+                        value={this.state.positionAvailable}
                         style={styles.singleLineTextField}
                         margin="normal"
                         size="small"
@@ -256,6 +287,7 @@ handleChange = name => e => {
                         id="phoneNumber"
                         label="Phone"
                         defaultValue=""
+                        value={this.state.phoneNumber}
                         style={styles.textField}
                         margin="normal"
                         size="small"
@@ -272,6 +304,7 @@ handleChange = name => e => {
                         id="emailAddress"
                         label="Email"
                         defaultValue=""
+                        value={this.state.emailAddress}
                         style={styles.textField}
                         margin="normal"
                         size="small"
@@ -297,6 +330,7 @@ handleChange = name => e => {
                         label="Message"
                         multiline
                         defaultValue=""
+                        value={this.state.message}
                         style={styles.singleLineTextField}
                         margin="normal"
                         variant="outlined"
@@ -342,6 +376,11 @@ handleChange = name => e => {
                   </Tooltip>
               </BottomNavigation>
             </Box>
+            <Snackbar onClose={() => this.setState({openSnackBar: false})} open={this.state.openSnackBar} autoHideDuration={3000} >
+                    <Alert  onClose={() => this.setState({openSnackBar: false})} style={styles.snackBarColor} severity="success">
+                        Message Sent!
+                    </Alert>
+            </Snackbar>
         </Paper>
     );
   }

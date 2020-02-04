@@ -54,7 +54,7 @@ class Home extends Component{
                 fontSize: '50px',
                 fontFamily: 'Sirin Stencil',
                 color: '#9e9e9e',
-                textShadow: '4px -3px 0px #f48fb1',
+                textShadow: '3px -3px 0px #f48fb1',
             },
             occupationFontMobile:{
                 fontFamily: 'Montserrat',

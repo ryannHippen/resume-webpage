@@ -29,7 +29,7 @@ class ContactInformation extends Component{
               secondary: {main: '#84ffff'}
             },
           });
-          
+
         const styles = {
             paperContainer: {
                 minHeight: '92vh',

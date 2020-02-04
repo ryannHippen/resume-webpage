@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import MaskedInput from 'react-text-mask';
 import PropTypes from 'prop-types';
 import { Paper, BottomNavigation, Divider, Typography, Grid, Box, Button,
-TextField, Tooltip} from '@material-ui/core';
+TextField, Tooltip, Snackbar } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
 import LinkedIn from '@material-ui/icons/LinkedIn'
 import GitHub from '@material-ui/icons/GitHub'
@@ -10,6 +10,11 @@ import Amplify, { Storage } from 'aws-amplify';
 import config from '../ampconfig';
 import SaveIcon from '@material-ui/icons/Save';
 import AwsDynamoApi from '../services/awsDynamo'
+import MuiAlert from '@material-ui/lab/Alert';
+
+function Alert(props) {
+  return <MuiAlert elevation={6} variant="filled" {...props} />;
+}
 
 Amplify.configure({
     Auth: {
@@ -99,6 +104,7 @@ class ResumeContact extends Component{
             message: null,
             emailValidated: true,
             ableToSendToDB: true,
+            openSnackBar: false,
         }
     }
 
@@ -115,6 +121,7 @@ class ResumeContact extends Component{
                 break;
             case 'positionAvailable':
                 this.setState({positionAvailable: e.target.value});
+                break;
             case 'emailAddress':
                 this.setState({emailAddress: e.target.value});
                 break;
@@ -136,6 +143,7 @@ class ResumeContact extends Component{
     };
 
     emailValidation = (e) => {
+        this.requiredFieldsCheck()
         const email = e.target.value;
         if(email.includes('@') && email.includes('.com')){
         this.setState({ emailValidated: true })
@@ -145,6 +153,7 @@ class ResumeContact extends Component{
       };
 
     send = () => { 
+        
         if(this.state.firstName !== null && this.state.organization !== null && this.state.emailAddress !== null && this.state.emailValidated === true){
             this.setState({ ableToSendToDB: true })
             const contactInfo = {'id': Date.now(),'firstName': this.state.firstName, 'lastName': this.state.lastName, 
@@ -152,6 +161,19 @@ class ResumeContact extends Component{
             'position' : this.state.positionAvailable, 'phone': this.state.phoneNumber, 
             'email': this.state.emailAddress, 'message': this.state.message}
             AwsDynamoApi.postRequest(contactInfo)
+            this.setState({ 
+                openSnackBar: true, 
+                firstName: '',
+                lastName: '',
+                organization: '',
+                positionAvailable: '',
+                phoneNumber: '',
+                emailAddress: '',
+                message: '',
+                emailValidated: true,
+                ableToSendToDB: true,
+                textmask: '',
+            })
 
         } else if (this.state.firstName === null && this.state.organization === null && this.state.emailAddress === null){
             this.setState({ ableToSendToDB: false })
@@ -171,7 +193,7 @@ class ResumeContact extends Component{
             [name]: e.target.value,
             phoneNumber: e.target.value,
         });
-      };  
+      };
 
     render(){
         const styles = {
@@ -198,16 +220,20 @@ class ResumeContact extends Component{
             buttonContainer: {
                 backgroundColor: 'transparent',
             },
+            snackBarColor: {
+                backgroundColor: '#FCF8D2',
+                color: 'black',
+            }
           };
 
           const getResume = () => {  
-            // Storage.get('Ryann Hippen - Resume.pdf').then(data => {
-            //     window.open(data, "_blank")
-            // })
-            // .catch(err => {
-            //     console.log('error downloading resume')
-            // })
-            window.open('', "_blank")
+            Storage.get('Ryann Hippen - Resume.pdf').then(data => {
+                window.open(data, "_blank")
+            })
+            .catch(err => {
+                console.log('error downloading resume')
+            })
+            // window.open('', "_blank")
         };  
 
         return (
@@ -219,6 +245,7 @@ class ResumeContact extends Component{
                             id="firstName"
                             label="First Name"
                             defaultValue=""
+                            value={this.state.firstName}
                             style={styles.textField}
                             margin="normal"
                             InputProps={{ style: { color: 'white' } }}
@@ -229,6 +256,7 @@ class ResumeContact extends Component{
                             id="lastName"
                             label="Last Name"
                             defaultValue=""
+                            value={this.state.lastName}
                             style={styles.textField}
                             margin="normal"
                             InputProps={{ style: { color: 'white' } }}
@@ -241,10 +269,12 @@ class ResumeContact extends Component{
                             id="organization"
                             label="Organization"
                             defaultValue=""
+                            value={this.state.organization}
                             style={styles.singleLineTextField}
                             margin="normal"
                             InputProps={{ style: { color: 'white' } }}
                             onChange= {this.contactRequestInfo}
+                            onBlur={this.requiredFieldsCheck}
                              
                         />
                     </Grid>
@@ -253,6 +283,7 @@ class ResumeContact extends Component{
                             id="positionAvailable"
                             label="Position Available"
                             defaultValue=""
+                            value={this.state.positionAvailable}
                             style={styles.singleLineTextField}
                             margin="normal"
                             InputProps={{ style: { color: 'white' } }}
@@ -264,6 +295,7 @@ class ResumeContact extends Component{
                             id="phoneNumber"
                             label="Contact Number"
                             defaultValue=""
+                            value={this.state.phoneNumber}
                             style={styles.textField}
                             margin="normal"
                             InputProps={{
@@ -278,6 +310,7 @@ class ResumeContact extends Component{
                             id="emailAddress"
                             label="Email Address"
                             defaultValue=""
+                            value={this.state.emailAddress}
                             style={styles.textField}
                             margin="normal"
                             InputProps={{ style: { color: 'white' } }}
@@ -301,6 +334,7 @@ class ResumeContact extends Component{
                             label="Message"
                             multiline
                             defaultValue=""
+                            value={this.state.message}
                             style={styles.singleLineTextField}
                             margin="normal"
                             variant="outlined"
@@ -345,6 +379,11 @@ class ResumeContact extends Component{
                     </Tooltip>
                 </BottomNavigation>
                 </Box>
+                <Snackbar onClose={() => this.setState({openSnackBar: false})} open={this.state.openSnackBar} autoHideDuration={3000} >
+                    <Alert  onClose={() => this.setState({openSnackBar: false})} style={styles.snackBarColor} severity="success">
+                        Message Sent!
+                    </Alert>
+                </Snackbar>
             </Paper>
         )
     }
