@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Typography, Grid, Paper } from '@material-ui/core';
+import { Typography, Grid, Paper, Container } from '@material-ui/core';
 import Carousel from './Carousel';
 
 class Projects extends Component{
@@ -12,7 +12,7 @@ class Projects extends Component{
                 width: '100vw',
                 overflowY: 'hidden',
                 overflowX: 'hidden',
-                backgroundColor: '#66C6DA',
+                backgroundColor: '#AEE1EB',
                 boxShadow: 'none',
             }
           };

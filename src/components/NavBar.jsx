@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { AppBar, Toolbar, Grid, ButtonBase, Button, Typography } from '@material-ui/core';
+import { AppBar, Toolbar, Grid, ButtonBase, Typography } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
 import { MuiThemeProvider, createMuiTheme }  from "@material-ui/core/styles";
 import { withRouter } from "react-router-dom";
@@ -47,7 +47,7 @@ const styles = theme => ({
         height: "7vh",
     },
   });
-  
+
   const Wrapper = styled.div`
   min-height: 8vh;
   display: flex;
@@ -203,9 +203,7 @@ class NavBar extends Component{
                                 </ButtonBase>
                             </Grid>
                         </Grid>
-
                         :
-
                         <Grid container direction="row" alignItems="center" justify="center" spacing={0}>
                             <Grid item >
                                 <ButtonBase disableRipple type="button"  onClick= {() => { this.navToAbout() }}>

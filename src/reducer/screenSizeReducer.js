@@ -6,13 +6,13 @@ export default function screenSize(state = initialState, action){
           case 'UPDATE':
               if(action.size.screenWidth === 0){
                 // console.log(state)
-                  return state;
+                  return {screen :state.screen}
               } else {
   
-                return {...state, screen: action.size};
+                return {...state.screem, screen: action.size};
               }
               
           default:
-              return state;
+              return {screen :state.screen};
       }
 };

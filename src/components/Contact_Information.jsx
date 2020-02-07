@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Box, Grid, Paper } from '@material-ui/core';
+import { Box, Paper } from '@material-ui/core';
 import { connect } from 'react-redux';
 import ResumeContact from './ResumeContact'
 import ResumeContactMobile from './ResumeContactMobile'
@@ -35,7 +35,7 @@ class ContactInformation extends Component{
                 minHeight: '92vh',
                 width: '100vw',
                 overflow: 'hidden',
-                backgroundColor: '#94BFFA',
+                backgroundColor: '#B1D0FB',
                 boxShadow: 'none',  
                 paddingTop: '8vh',
                 // paddingBottom: '20vh',
