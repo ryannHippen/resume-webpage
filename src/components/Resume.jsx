@@ -128,7 +128,7 @@ Amplify.configure({
     root: {
         flexGrow: 1,
         display: 'flex',
-        minHeight: '92vh',
+        minHeight: '93vh',
         backgroundColor: '#c6f1e0',
         boxShadow: 'none',
         alignItems: 'center',
@@ -156,8 +156,8 @@ Amplify.configure({
     },
     tabsMobile: {
         borderRight: `0px solid ${theme.palette.divider}`,
-        marginTop: 70,
-        marginBottom: 70,
+        marginTop: '9vh',
+        marginBottom: '9vh',
         paddingRight: 27,
         paddingLeft: 20,
         color: '#9e9e9e',  
@@ -224,6 +224,11 @@ Amplify.configure({
     card: {
         width: 450,
     },
+    cardMobile: {
+        width: "50vw",
+        maxHeight: "33vh",
+        overflow: "auto"
+    },
     educationFont: {
         paddingLeft: '10px',
         paddingRight: '10px',
@@ -272,7 +277,7 @@ Amplify.configure({
     },
     durationMobile: {
         fontFamily: 'Montserrat',
-        fontSize: '9px',
+        fontSize: '8px',
         color: '#9e9e9e',
     },
     jobTitle: {
@@ -283,7 +288,7 @@ Amplify.configure({
     },
     jobTitleMobile: {
         fontFamily: 'Montserrat',
-        fontSize: '10px',
+        fontSize: '9px',
         color: '#9389e2',
         fontWeight: 'bold',
     },
@@ -300,7 +305,7 @@ Amplify.configure({
     return (
 <MuiThemeProvider theme={theme}>
     <div className={classes.root}>
-        {screen.screenWidth > 700 ? 
+        {screen.screenWidth > 700 & screen.screenHeight > 700 ? 
             <Tabs 
                 orientation="vertical"
                 value={value}
@@ -328,7 +333,7 @@ Amplify.configure({
         }
         <Container maxWidth='lg' disableGutters>
             <TabPanel value={value} index={0} >
-                {screen.screenWidth > 600 ?
+                {screen.screenWidth > 700 & screen.screenHeight > 700 ? 
                 <Grid container direction="row" justify="center" spacing={10} >
                     <Grid item>
                         <Card className={classes.card} >
@@ -380,9 +385,9 @@ Amplify.configure({
                 :
                 <Grid container direction="row" justify="center" spacing={5} >
                     <Grid item>
-                        <Card >
+                        <Card className={classes.cardMobile}>
                             <CardContent>
-                                <Typography className={classes.titleMobile} color="textSecondary" gutterBottom>
+                                <Typography className={classes.titleMobile} color="textSecondary" >
                                     Front End
                                 </Typography>
                                 <List dense={true}>
@@ -402,9 +407,9 @@ Amplify.configure({
                         </Card>
                     </Grid>
                     <Grid item>
-                        <Card >
+                        <Card className={classes.cardMobile} >
                             <CardContent>
-                                <Typography className={classes.titleMobile} color="textSecondary" gutterBottom>
+                                <Typography className={classes.titleMobile} color="textSecondary" >
                                     Back End
                                 </Typography>
                                 <List dense={true}>
@@ -412,7 +417,7 @@ Amplify.configure({
                                     {technologiesBE.map((tech) =>
                                         <Grid item xs={6}>
                                             <ListItem  disableGutters={true}>
-                                                <Typography className={classes.titleMobile}>
+                                            <Typography className={classes.titleMobile}>
                                                     <ListItemText disableTypography={true} primary={tech.technology} /> 
                                                 </Typography>
                                             </ListItem>
@@ -427,7 +432,7 @@ Amplify.configure({
                 }
             </TabPanel>
             <TabPanel value={value} index={1}  >
-                {screen.screenWidth > 600 ?
+                {screen.screenWidth > 700 & screen.screenHeight > 700 ? 
                     <Grid container direction="column" justify="center" alignItems="center" >
                     <Grid item>  
                         <Box container>
@@ -476,7 +481,7 @@ Amplify.configure({
                 }
             </TabPanel >
             <TabPanel value={value} index={2} >
-                {screen.screenWidth > 600 ?
+                {screen.screenWidth > 700 & screen.screenHeight > 700 ? 
                 <Box pt={7}> 
                     {work.map((job, i) =>  
                         <Box pl={1}    > 
@@ -517,10 +522,10 @@ Amplify.configure({
                                 <Grid container direction='row'>
                                     <Paper className={classes.paperContainerLeftMobile}>
                                         <Grid direction='column' container >
-                                            <Box pb={1} container >
+                                            <Box pb={0} container >
                                                 <Typography className={classes.companyMobile} >{job.company} - {job.title}</Typography>
                                             </Box>
-                                            <Box pb={2}  container >
+                                            <Box pb={1}  container >
                                                 <Typography className={classes.durationMobile} >{job.duration}</Typography>
                                             </Box>
                                         </Grid>

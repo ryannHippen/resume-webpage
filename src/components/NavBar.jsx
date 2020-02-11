@@ -49,7 +49,7 @@ const styles = theme => ({
   });
 
   const Wrapper = styled.div`
-  min-height: 8vh;
+  max-height: 8vh;
   display: flex;
   align-items: center;
 `;
@@ -166,7 +166,7 @@ class NavBar extends Component{
             <MuiThemeProvider theme={muiTheme}>
                 <AppBar position="" className={classes.appBarBackground} >
                     <Toolbar>
-                        {this.props.screen.screenWidth > 700 ?
+                    {this.props.screen.screenWidth > 700 && this.props.screen.screenHeight > 700 ? 
                         <Grid container direction="row" alignItems="center" justify="center" spacing={4}>
                             <Grid item >
                                 <ButtonBase disableRipple type="button"  onClick= {() => { this.navToAbout() }}>

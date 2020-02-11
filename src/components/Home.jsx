@@ -13,7 +13,7 @@ class Home extends Component{
     render(){
         const styles = {
             paperContainer: {
-                minHeight: '92vh',
+                minHeight: '93vh',
                 width: '50vw',
                 overflow: 'hidden',
                 backgroundColor: '#D1F2EB',
@@ -73,7 +73,7 @@ class Home extends Component{
 
         return (
             <div>
-                {this.props.screen.screenWidth > 700 ?
+                {this.props.screen.screenWidth > 700 & this.props.screen.screenHeight > 700 ? 
                     <Grid container direction="row" alignItems="center"    >
                         <Paper style={styles.paperContainer}>
                             <Grid container direction="row" justify="flex-end" alignItems="center" >

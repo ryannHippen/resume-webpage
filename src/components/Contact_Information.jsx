@@ -32,7 +32,7 @@ class ContactInformation extends Component{
 
         const styles = {
             paperContainer: {
-                minHeight: '92vh',
+                minHeight: '93vh',
                 width: '100vw',
                 overflow: 'hidden',
                 backgroundColor: '#B1D0FB',
@@ -50,17 +50,24 @@ class ContactInformation extends Component{
         return (
             <MuiThemeProvider theme={theme}>
             <Paper style={styles.paperContainer}>
-                {this.props.screen.screenWidth > 600 ? 
+                {this.props.screen.screenWidth > 600 & this.props.screen.screenHeight > 600 ? 
                     <Box pt={5}>
                         <ResumeContact /> 
                     </Box>
-                    :
-                    <Paper style={styles.paperContainerContact}>
-                        <Box>
-                            <ResumeContactMobile /> 
-                        </Box> 
-                    </Paper>
+                    : 
+                    null
                 }
+                {this.props.screen.screenWidth < 600 & this.props.screen.screenWidth > this.props.screen.screenHeight ? 
+                    <Paper style={styles.paperContainerContact}>
+                    <Box>
+                        <ResumeContactMobile /> 
+                    </Box> 
+                    </Paper>
+                    : 
+                    this.props.screen.screenWidth 
+                }
+                {console.log(this.props.screen.screenWidth > this.props.screen.screenHeight)}
+                {console.log(this.props.screen.screenWidth < 600)}
             </Paper>
             </MuiThemeProvider>
         )

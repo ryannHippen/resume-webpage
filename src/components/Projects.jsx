@@ -8,7 +8,7 @@ class Projects extends Component{
 
         const styles = {
             paperContainer: {
-                minHeight: '92vh',
+                minHeight: '93vh',
                 width: '100vw',
                 overflowY: 'hidden',
                 overflowX: 'hidden',

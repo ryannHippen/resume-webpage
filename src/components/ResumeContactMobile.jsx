@@ -204,6 +204,7 @@ handleChange = name => e => {
         },
         hiddenText: {
           fontSize: 10,
+          
         },
         snackBarColor: {
             backgroundColor: '#FCF8D2',
@@ -224,6 +225,16 @@ handleChange = name => e => {
     return (
         <Paper style={styles.paperContainer}>
             <Grid container direction="column" justify="center" alignItems="center" >
+                <Grid item hidden={this.state.emailValidated}>
+                    <Box pt={1}>
+                        <Typography style={styles.hiddenText} color="primary">Email is not correctly formatted or empty</Typography>
+                    </Box>
+                </Grid>
+                <Grid item hidden={this.state.ableToSendToDB}>
+                    <Box pt={1}>
+                        <Typography style={styles.hiddenText} color="primary">Please fill out all required fields</Typography>
+                    </Box>
+                </Grid>
                 <Grid item>
                     <TextField
                         required
@@ -314,16 +325,7 @@ handleChange = name => e => {
                         onBlur= {this.emailValidation}
                     />
                 </Grid>
-                <Grid item hidden={this.state.emailValidated}>
-                        <Box pt={1}>
-                            <Typography style={styles.hiddenText} color="secondary">Email is not correctly formatted or empty</Typography>
-                        </Box>
-                    </Grid>
-                    <Grid item hidden={this.state.ableToSendToDB}>
-                        <Box pt={1}>
-                            <Typography style={styles.hiddenText} color="secondary">Please fill out all required fields</Typography>
-                        </Box>
-                    </Grid>
+                
                 <Grid item>
                     <TextField
                         id="message"

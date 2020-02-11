@@ -41,8 +41,8 @@ class ProjectCarousel extends Component {
         this.state = {
             projects: [],
             projectFileNames: [
-                'Game Search - Project.webm',
-                'Game Search with Login - Project.webm'
+                'Game Search - Project.mp4',
+                'Game Search with Login - Project.mp4'
             ],
             projectTechnologies: ['one', 'two'],
             technologies :[
@@ -102,8 +102,10 @@ class ProjectCarousel extends Component {
     ]
         return (
           
-          <Grid container direction='row' justify='center' >
-              <Box width="1200px" mt={10} container>
+          <Grid container direction='row' justify='center' alignItems="center">
+            {this.props.screen.screenWidth > 700 & this.props.screenHeight > 700 ? 
+            
+              <Box width="1200px" mt={0} container>
                   <Card style={styles.card}>
                       <CardActionArea>
                           <CardContent>
@@ -134,13 +136,46 @@ class ProjectCarousel extends Component {
                       </CardActions>
                   </Card>
               </Box>  
+            :
+              <Box width="80%" mt={0} container alignItems="center">
+                  <Card style={styles.card}>
+                      <CardActionArea>
+                          <CardContent>
+                              <Carousel 
+                                    axis='horizontal' 
+                                    showStatus={false} 
+                                    showThumbs={false} 
+                                    autoPlay={false}  
+                                    showIndicators={false}
+                                    infiniteLoop={true} 
+                                    transitionTime={1000}
+                                    interval={4000}
+                                >
+                                {this.state.projectFileNames.map((project, i) =>
+                                    <div>
+                                        <video controls width="70%" height='50%' src={this.state.projects[i]} />
+                                    </div>
+                                )}
+                                </Carousel>
+                          </CardContent>
+                      </CardActionArea>
+                      <CardActions>
+                          <Grid container justify="center" >
+                          <Typography> 
+                            {/* <img src={this.state.technologies[0].svg} /> */}
+                            </Typography>
+                          </Grid >
+                      </CardActions>
+                  </Card>
+              </Box>  
+            }
           </Grid>
-        );
+        )
     }
 }
 
 function mapStateToProps(state) {
-    return { projectsRetrieved: state.projectReducer.projectVideoURL }
+    return { projectsRetrieved: state.projectReducer.projectVideoURL, screen: state.screenSizeReducer.screen  }
   }
 
 const mapDispatchToProps = dispatch => {
