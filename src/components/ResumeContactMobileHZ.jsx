@@ -142,25 +142,25 @@ send = () => {
       AwsDynamoApi.postRequest(contactInfo)
       this.setState({ 
         openSnackBar: true, 
-        firstName: '',
-        lastName: '',
-        organization: '',
-        positionAvailable: '',
-        phoneNumber: '',
-        emailAddress: '',
-        message: '',
+        firstName: null,
+        lastName: null,
+        organization: null,
+        positionAvailable: null,
+        phoneNumber: null,
+        emailAddress: null,
+        message: null,
         emailValidated: true,
         ableToSendToDB: true,
-        textmask: '',
+        textmask: null,
     })
 
   } else if (this.state.firstName === null || this.state.organization === null || this.state.emailAddress === null){
-    this.setState({ ableToSendToDB: false, openSnackBarRequiredFieldsError: true })
-    console.log(this.state.emailValidated)
-    } else if (this.state.emailAddress !== null && this.state.emailValidated === false){
+      this.setState({ ableToSendToDB: false, openSnackBarRequiredFieldsError: true })
+      console.log(this.state.emailValidated)
+  } else if (this.state.emailAddress !== null && this.state.emailValidated === false){
     this.setState({ ableToSendToDB: false, openSnackBarEmailValidError: true })
     console.log(this.state.emailValidated)
-    }
+}
 };
 
 navToGitHub = () => {  
@@ -185,6 +185,7 @@ handleChange = name => e => {
             overflow: 'hidden',
             backgroundColor: 'transparent',
             boxShadow: 'none',
+            marginTop: -20,
         },
         bottomNavigationContainer: {
             backgroundColor: 'transparent', 
@@ -194,8 +195,8 @@ handleChange = name => e => {
             flexWrap: 'wrap',
         },
         textField: {
-            marginLeft: '3px',
-            marginRight: '3px',
+            marginLeft: '15px',
+            marginRight: '15px',
             width: 100,
             fontSize: 13,
         },
@@ -216,6 +217,9 @@ handleChange = name => e => {
             backgroundColor: '#FCF8D2',
             color: 'black',
             marginBottom: '10vh',
+        },
+        messageBox: {
+            width: 312,
         }
       };
 
@@ -246,13 +250,13 @@ handleChange = name => e => {
                         required
                         id="firstName"
                         label="First Name"
-                        defaultValue=""
+                        defaultValue={this.state.firstName}
                         value={this.state.firstName}
                         style={styles.textField}
                         margin="normal"
                         size="small"
                         InputLabelProps={{ style: { fontSize: 13 } }}
-                        InputProps={{ style: { fontSize: 12, color: 'white' } }}
+                        InputProps={{ style: { fontSize: 12, color: 'white'} }}
                         onChange= {this.contactRequestInfo}
                         onBlur={this.requiredFieldsCheck}
                     />
@@ -268,8 +272,6 @@ handleChange = name => e => {
                         InputProps={{ style: { fontSize: 12, color: 'white' } }}
                         onChange= {this.contactRequestInfo}
                     />
-                </Grid>
-                <Grid item>
                     <TextField
                         required
                         id="organization"
@@ -283,21 +285,7 @@ handleChange = name => e => {
                         InputProps={{ style: { fontSize: 12, color: 'white' } }}
                         onChange= {this.contactRequestInfo}
                         onBlur={this.requiredFieldsCheck}
-                    />
-                </Grid>
-                <Grid item>
-                    <TextField
-                        id="positionAvailable"
-                        label="Position Available"
-                        defaultValue=""
-                        value={this.state.positionAvailable}
-                        style={styles.singleLineTextField}
-                        margin="normal"
-                        size="small"
-                        InputLabelProps={{ style: { fontSize: 13 } }}
-                        InputProps={{ style: { fontSize: 12, color: 'white' } }}
-                        onChange= {this.contactRequestInfo}
-                    />
+                    />      
                 </Grid>
                 <Grid item>
                     <TextField
@@ -330,6 +318,18 @@ handleChange = name => e => {
                         onChange= {this.contactRequestInfo}
                         onBlur= {this.emailValidation}
                     />
+                    <TextField
+                        id="positionAvailable"
+                        label="Position Available"
+                        defaultValue=""
+                        value={this.state.positionAvailable}
+                        style={styles.singleLineTextField}
+                        margin="normal"
+                        size="small"
+                        InputLabelProps={{ style: { fontSize: 13 } }}
+                        InputProps={{ style: { fontSize: 12, color: 'white' } }}
+                        onChange= {this.contactRequestInfo}
+                    />
                 </Grid>
                 
                 <Grid item>
@@ -339,11 +339,11 @@ handleChange = name => e => {
                         multiline
                         defaultValue=""
                         value={this.state.message}
-                        style={styles.singleLineTextField}
+                        style={styles.messageBox}
                         margin="normal"
                         variant="outlined"
                         size="small"
-                        rowsMax={5}
+                        rowsMax={3}
                         rows={10}
                         InputLabelProps={{ style: { fontSize: 13 } }}
                         InputProps={{ style: { fontSize: 12, color: 'white' } }}
@@ -365,7 +365,7 @@ handleChange = name => e => {
                         </Box>
                     </Grid>
                 </Box>
-            <Box pt={3}>
+            <Box pt={1}>
               <BottomNavigation style={styles.bottomNavigationContainer}>  
                   <Tooltip title="My GitHub Homepage">
                       <Button onClick={this.navToGitHub} size="small">
@@ -384,17 +384,26 @@ handleChange = name => e => {
                   </Tooltip>
               </BottomNavigation>
             </Box>
-            <Snackbar onClose={() => this.setState({openSnackBar: false})} open={this.state.openSnackBar} autoHideDuration={3000} >
+            <Snackbar 
+                onClose={() => this.setState({openSnackBar: false})} 
+                open={this.state.openSnackBar} autoHideDuration={3000}
+                >
                     <Alert  onClose={() => this.setState({openSnackBar: false})} style={styles.snackBarColor} severity="success">
                         Message Sent!
                     </Alert>
             </Snackbar>
-            <Snackbar onClose={() => this.setState({openSnackBarRequiredFieldsError: false})} open={this.state.openSnackBarRequiredFieldsError} autoHideDuration={3000} >
+            <Snackbar 
+                onClose={() => this.setState({openSnackBarRequiredFieldsError: false})} 
+                open={this.state.openSnackBarRequiredFieldsError} autoHideDuration={3000} 
+                  >
                     <Alert  onClose={() => this.setState({openSnackBarRequiredFieldsError: false})} style={styles.snackBarColor} severity="warning">
                         Missing Required Fields
                     </Alert>
             </Snackbar>
-            <Snackbar onClose={() => this.setState({openSnackBarEmailValidError: false})} open={this.state.openSnackBarEmailValidError} autoHideDuration={3000} >
+            <Snackbar 
+                onClose={() => this.setState({openSnackBarEmailValidError: false})} 
+                open={this.state.openSnackBarEmailValidError} autoHideDuration={3000} 
+                  >
                     <Alert  onClose={() => this.setState({openSnackBarEmailValidError: false})} style={styles.snackBarColor} severity="warning">
                         Valid Email Required
                     </Alert>

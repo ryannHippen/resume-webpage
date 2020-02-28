@@ -105,6 +105,8 @@ class ResumeContact extends Component{
             emailValidated: true,
             ableToSendToDB: true,
             openSnackBar: false,
+            openSnackBarEmailValidError: false,
+            openSnackBarRequiredFieldsError: false,
         }
     }
 
@@ -175,13 +177,17 @@ class ResumeContact extends Component{
                 textmask: '',
             })
 
-        } else if (this.state.firstName === null && this.state.organization === null && this.state.emailAddress === null){
-            this.setState({ ableToSendToDB: false })
-        }
+        } else if (this.state.firstName === null || this.state.organization === null || this.state.emailAddress === null){
+            this.setState({ ableToSendToDB: false, openSnackBarRequiredFieldsError: true })
+            console.log(this.state.emailValidated)
+            } else if (this.state.emailAddress !== null && this.state.emailValidated === false){
+            this.setState({ ableToSendToDB: false, openSnackBarEmailValidError: true })
+            console.log(this.state.emailValidated)
+            }
     };
 
     navToGitHub = () => {  
-        window.open("https://github.com/ryannHippen", "_blank")
+        window.open("https://github.com/ryannHippen/resume-webpage", "_blank")
     }  
     
     navToLinkedIn = () => {  
@@ -223,6 +229,9 @@ class ResumeContact extends Component{
             snackBarColor: {
                 backgroundColor: '#FCF8D2',
                 color: 'black',
+            },
+            hiddenMessage: {
+                marginTop: -10,
             }
           };
 
@@ -239,6 +248,16 @@ class ResumeContact extends Component{
         return (
             <Paper style={styles.paperContainer}>
                 <Grid container direction="column" justify="center" alignItems="center" >
+                    {/* <Grid item hidden={this.state.emailValidated}>
+                        <Box pt={1}>
+                            <Typography style={styles.hiddenMessage} color="primary">Email is not correctly formatted or empty</Typography>
+                        </Box>
+                    </Grid>
+                    <Grid item hidden={this.state.ableToSendToDB}>
+                        <Box pt={1}>
+                            <Typography style={styles.hiddenMessage} color="primary">Please fill out all required fields indicated, by an *</Typography>
+                        </Box>
+                    </Grid> */}
                     <Grid item>
                         <TextField
                             required
@@ -318,16 +337,7 @@ class ResumeContact extends Component{
                             onBlur= {this.emailValidation}
                         />
                     </Grid>
-                    <Grid item hidden={this.state.emailValidated}>
-                        <Box pt={1}>
-                            <Typography color="secondary">Email is not correctly formatted or empty</Typography>
-                        </Box>
-                    </Grid>
-                    <Grid item hidden={this.state.ableToSendToDB}>
-                        <Box pt={1}>
-                            <Typography color="secondary">Please fill out all required fields indicated, by an *</Typography>
-                        </Box>
-                    </Grid>
+                    
                     <Grid item>
                         <TextField
                             id="message"
@@ -383,6 +393,16 @@ class ResumeContact extends Component{
                     <Alert  onClose={() => this.setState({openSnackBar: false})} style={styles.snackBarColor} severity="success">
                         Message Sent!
                     </Alert>
+                </Snackbar>
+                <Snackbar onClose={() => this.setState({openSnackBarRequiredFieldsError: false})} open={this.state.openSnackBarRequiredFieldsError} autoHideDuration={3000} >
+                    <Alert  onClose={() => this.setState({openSnackBarRequiredFieldsError: false})} style={styles.snackBarColor} severity="warning">
+                        Please Fill Out All Fields Required Fields
+                    </Alert>
+                </Snackbar>
+                <Snackbar onClose={() => this.setState({openSnackBarEmailValidError: false})} open={this.state.openSnackBarEmailValidError} autoHideDuration={3000} >
+                        <Alert  onClose={() => this.setState({openSnackBarEmailValidError: false})} style={styles.snackBarColor} severity="warning">
+                            Email Is Empty Or Incorrectly Formatted
+                        </Alert>
                 </Snackbar>
             </Paper>
         )

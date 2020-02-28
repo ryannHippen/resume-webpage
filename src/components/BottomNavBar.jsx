@@ -45,7 +45,7 @@ const styles = theme => ({
 class BottomNavBar extends Component{
 
     navToGitHub = () => {  
-        window.open("https://github.com/ryannHippen?tab=repositories", "_blank")
+        window.open("https://github.com/ryannHippen/resume-webpage", "_blank")
     }  
     
     navToLinkedIn = () => {  

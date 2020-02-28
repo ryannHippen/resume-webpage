@@ -3,6 +3,7 @@ import { Box, Paper } from '@material-ui/core';
 import { connect } from 'react-redux';
 import ResumeContact from './ResumeContact'
 import ResumeContactMobile from './ResumeContactMobile'
+import ResumeContactMobileHZ from './ResumeContactMobileHZ'
 import { MuiThemeProvider, createMuiTheme }  from "@material-ui/core/styles";
 
 
@@ -51,23 +52,30 @@ class ContactInformation extends Component{
             <MuiThemeProvider theme={theme}>
             <Paper style={styles.paperContainer}>
                 {this.props.screen.screenWidth > 600 & this.props.screen.screenHeight > 600 ? 
-                    <Box pt={5}>
+                    <Box pt={0}>
                         <ResumeContact /> 
                     </Box>
                     : 
                     null
                 }
-                {this.props.screen.screenWidth < 600 & this.props.screen.screenWidth > this.props.screen.screenHeight ? 
+                {this.props.screen.screenWidth < 600 && this.props.screen.screenWidth < this.props.screen.screenHeight ? 
                     <Paper style={styles.paperContainerContact}>
                     <Box>
                         <ResumeContactMobile /> 
                     </Box> 
                     </Paper>
                     : 
-                    this.props.screen.screenWidth 
+                    null
                 }
-                {console.log(this.props.screen.screenWidth > this.props.screen.screenHeight)}
-                {console.log(this.props.screen.screenWidth < 600)}
+                {this.props.screen.screenWidth < 825 && this.props.screen.screenWidth > this.props.screen.screenHeight ? 
+                    <Paper style={styles.paperContainerContact}>
+                    <Box>
+                        <ResumeContactMobileHZ /> 
+                    </Box> 
+                    </Paper>
+                    : 
+                    null
+                }
             </Paper>
             </MuiThemeProvider>
         )
