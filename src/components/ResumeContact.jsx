@@ -74,7 +74,7 @@ const styles = theme => ({
         
     },
     paperContainer: {
-        overflow: 'hidden'
+        overflow: 'hidden',
     },
     typographyColor: {
         color: 'white'
@@ -372,7 +372,7 @@ class ResumeContact extends Component{
                 </Box>
                 <Box pt={1}>
                 <BottomNavigation style={styles.bottomNavigationContainer}>  
-                    <Tooltip title="My GitHub Homepage">
+                    <Tooltip title="GitHub Repo for this Site">
                         <Button onClick={this.navToGitHub} size="small">
                             <GitHub />
                         </Button>

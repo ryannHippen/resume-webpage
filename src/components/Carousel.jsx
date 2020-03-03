@@ -104,12 +104,15 @@ class ProjectCarousel extends Component {
             //margin: "auto",
         },
         devIconStyleMobile: {
-            height: "15px",
+            height: "13px",
             marginRight: 10,
             //margin: "auto",
         },
         projectName: {
+          fontFamily: 'Montserrat',
           fontSize: 15,
+          color: '#9389e2',
+          fontWeight: 'bold',
         },
         projectNameMobile: {
           fontFamily: 'Montserrat',
@@ -119,6 +122,8 @@ class ProjectCarousel extends Component {
         },
         projectDescription: {
           fontSize: 12,
+          fontFamily: 'Montserrat',
+          color: '#666765',
         },
         projectDescriptionMobile: {
           fontFamily: 'Montserrat',
@@ -126,11 +131,25 @@ class ProjectCarousel extends Component {
           color: '#9e9e9e'
         },
         projectTech: {
-          fontSize: 15,
+          fontSize: 14,
+          fontFamily: 'Montserrat',
+          color: '#9389e2',
         },
         projectTechMobile: {
-          fontSize: 15,
-        }
+          fontSize: 13,
+          fontFamily: 'Montserrat',
+          color: '#9389e2',
+        },
+        projectRepo: {
+          fontSize: 14,
+          fontFamily: 'Montserrat',
+          color: '#066F64',
+        },
+        projectRepoMobile: {
+          fontSize: 11,
+          fontFamily: 'Montserrat',
+          color: '#066F64',
+        },
       };
       const technologies  = [
         {'technology': 'Material UI', 'svg': Material},
@@ -142,13 +161,13 @@ class ProjectCarousel extends Component {
         'repoLink': 'https://github.com/ryannHippen/game-db'},
         {'name': 'Project 2 - Login with local DB: ', 'technologies': [Material, Reactjs, Redux, Python, Mysql],
         'description': ' I created a login page for a website that allows you to search for video games to get info about them as well as what consoles they are available on. With Python as the API for React I stored hashed passwords in a local MySQL DB and connected with an external API for searching games.',
-        'repoLink': ''},
+        'repoLink': 'https://github.com/ryannHippen/game-search-react/tree/master/Documents/workspace-spring-tool-suite-4-4.4.0.RELEASE'},
       ]
         return (
           
           <Grid container direction='row' justify='center' alignItems="center">
             {this.props.screen.screenWidth > 800 && this.props.screen.screenHeight > 800 ? 
-              <Box width="1200px" mt={0} container>
+              <Box width="1100px" mt={0} container>
                   <Card style={styles.card}>
                     <CardActionArea>
                       <CardMedia>
@@ -164,7 +183,7 @@ class ProjectCarousel extends Component {
                           >
                           {this.state.projectFileNames.map((project, i) =>
                               <div>
-                                  <video controls width="900px" height='600' src={this.state.projects[i]} />
+                                  <video controls width="800px" height='550' src={this.state.projects[i]} />
                               </div>
                               
                           )}
@@ -172,17 +191,31 @@ class ProjectCarousel extends Component {
                         </CardMedia>
                       </CardActionArea>
                   </Card>
-                  <Box width="95%" >
+                  <Box pt={3} width="95%" >
                     {projectInfo.map((project, i) => 
                     <Box pb={2} >
                       <Grid container direction="row"      >
-                        <Grid item  xs={1} />
+                          <Grid item  xs={1} />
                           <Grid item  xs={3} >
-                              <Typography align="right">{project.name}</Typography>
+                              <Typography style={styles.projectName} align="right">{project.name}</Typography>
                           </Grid>
-                          <Grid item  xs={3} />
+                          <Grid item  xs={1} >
+                            <ButtonBase disableRipple type="button"  onClick= {() => { this.navToProjectRepo(project.repoLink) }}>
+                              <Typography onClick= {() => { this.navToProjectRepo(project.repoLink) }} style={styles.projectRepo}  className="repoButton">Repository</Typography>
+                            </ButtonBase>
+                          </Grid> 
+                          <Grid item  xs={7} />
+                          
+                          {/* end of row 1 */}
+                          <Grid item  xs={2} />
+                          <Grid item xs={6}>
+                            <Box pt={1} pb={1}>
+                            <Typography style={styles.projectDescription}  align="left">{project.description}</Typography>
+                            </Box>
+                              
+                          </Grid>
                           <Grid item xs={2}>
-                              <Typography align="right">Technologies:</Typography>
+                              <Typography style={styles.projectTech} align="right">Technologies:</Typography>
                           </Grid>
                           <Grid item xs={2}>
                             <Box ml={2}>
@@ -190,20 +223,8 @@ class ProjectCarousel extends Component {
                               <img style={styles.devIconStyle} src={svg} />
                               )}
                             </Box>
-                            
                           </Grid>
-                          <Grid item  xs={1} >
-                            <ButtonBase disableRipple type="button"  onClick= {() => { this.navToProjectRepo(project.repoLink) }}>
-                              <Typography className="navBarText">Repo</Typography>
-                            </ButtonBase>
-                          </Grid>
-                          {/* end of row 1 */}
-                          <Grid item  xs={2} />
-                          <Grid item xs={8}>
-                              <Typography align="left">{project.description}</Typography>
-                          </Grid>
-                          <Grid item  xs={2} />
-                          
+                          <Grid item  xs={1} />
                       </Grid>
                       </Box>
                     )}
@@ -216,7 +237,7 @@ class ProjectCarousel extends Component {
                           <CardContent>
                               <Carousel 
                                     axis='horizontal' 
-                                    showStatus={false} 
+                                    showStatus={true} 
                                     showThumbs={false} 
                                     autoPlay={false}  
                                     showIndicators={false}
@@ -232,25 +253,30 @@ class ProjectCarousel extends Component {
                                 </Carousel>
                           </CardContent>
                       </CardActionArea>
-                      <CardActions>
-                          <Grid container justify="center" >
-                          <Typography> 
-                            {/* <img src={this.state.technologies[0].svg} /> */}
-                            </Typography>
-                          </Grid >
-                      </CardActions>
                   </Card>
                   <Box width="95%" >
                     {projectInfo.map((project, i) => 
-                    <Box pb={1} >
+                    <Box pl={3} pb={1} >
                       <Grid container direction="row"      >
+                        <Box pb={2}>
                           <Grid item  xs={12}>
                               <Typography style={styles.projectNameMobile} align="left">{project.name}</Typography>
                           </Grid>
-                          <Grid item >
+                          </Box>
+                          <Box pb={2}>
+                          <Grid item  xs={12} >
+                            <ButtonBase size="small" variant="outlined" type="button"  onClick= {() => { this.navToProjectRepo(project.repoLink) }}>
+                              <Typography style={styles.projectRepoMobile} align="center">Link To Repo</Typography>
+                            </ButtonBase>
+                          </Grid>
+                          </Box>
+                          <Grid item xs={12}/>
+                          <Box pb={2}>
+                          <Grid item xs={5}>
                               <Typography style={styles.projectTechMobile}  align="left">Technologies:</Typography>
                           </Grid>
-                          <Grid item >
+                          </Box>
+                          <Grid item xs={7}>
                             <Box ml={2}>
                             {project.technologies.map(svg =>
                               <img style={styles.devIconStyleMobile} src={svg} />
@@ -258,16 +284,14 @@ class ProjectCarousel extends Component {
                             </Box>
                             
                           </Grid>
-                          <Grid item  xs={12} >
-                            <ButtonBase size="small" variant="outlined" type="button"  onClick= {() => { this.navToProjectRepo(project.repoLink) }}>
-                              <Typography style={styles.projectTechMobile} align="center">Link To Repo</Typography>
-                            </ButtonBase>
-                          </Grid>
+                          
                           {/* end of row 1 */}
                           <Grid item   />
+                          <Box pb={2}>
                           <Grid item >
                               <Typography style={styles.projectDescriptionMobile}  align="left">{project.description}</Typography>
                           </Grid>
+                          </Box>
                           <Grid item />
                           
                       </Grid>

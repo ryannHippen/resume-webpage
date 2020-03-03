@@ -367,7 +367,7 @@ handleChange = name => e => {
                 </Box>
             <Box pt={1}>
               <BottomNavigation style={styles.bottomNavigationContainer}>  
-                  <Tooltip title="My GitHub Homepage">
+                  <Tooltip title="GitHub Repo for this Site">
                       <Button onClick={this.navToGitHub} size="small">
                           <GitHub />
                       </Button>

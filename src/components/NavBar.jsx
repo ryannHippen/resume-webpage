@@ -36,12 +36,12 @@ const styles = theme => ({
         
     },
     logo: {
-        marginTop: '-15px',
         height: "10vh",
-        margin: "auto",
-        marginBottom: '-15px',
-        marginLeft: '-15px',
-        marginRight: '-15px',
+        // margin: "auto",
+        // marginBottom: '-15px',
+        // marginLeft: '-15px',
+        // marginRight: '-15px',
+        // marginTop: '-15px',
     },
     logoMobile: {
         height: "7vh",

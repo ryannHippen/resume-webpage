@@ -48,6 +48,23 @@ https://coolors.co/c00149-dba964-10edfb-66c6da-fcf8d2 */
   font-weight: 500;
 }
 
+.repoButton{
+  /* display: inline-block; */
+  /* padding:4px 8px; */
+  /* font-size: 17px; */
+  padding-top: 1px;
+  padding-left: 20px;
+  font-weight: bold;
+}
+
+.repoButton:hover {
+  /* color: #f48fb1; */
+  /* font-size: 17px; */
+  /* font-weight: bold; */
+  text-shadow: 1px 0 0 currentColor;
+
+}
+
 .navBarText:hover {
   /* color: #f48fb1; */
   /* font-size: 17px; */
