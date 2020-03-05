@@ -179,10 +179,8 @@ class ResumeContact extends Component{
 
         } else if (this.state.firstName === null || this.state.organization === null || this.state.emailAddress === null){
             this.setState({ ableToSendToDB: false, openSnackBarRequiredFieldsError: true })
-            console.log(this.state.emailValidated)
             } else if (this.state.emailAddress !== null && this.state.emailValidated === false){
             this.setState({ ableToSendToDB: false, openSnackBarEmailValidError: true })
-            console.log(this.state.emailValidated)
             }
     };
 

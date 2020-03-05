@@ -95,12 +95,12 @@ class ProjectCarousel extends Component {
         card: {
           backgroundColor: 'transparent',
           boxShadow: 'none',
-          paddingTop: 30,
-          paddingBottom: 20,
+          paddingTop: '2vh',
+          paddingBottom: '1vh',
         },
         devIconStyle: {
-            height: "20px",
-            marginRight: 10,
+            height: "18px",
+            marginRight: 6,
             //margin: "auto",
         },
         devIconStyleMobile: {
@@ -166,8 +166,8 @@ class ProjectCarousel extends Component {
         return (
           
           <Grid container direction='row' justify='center' alignItems="center">
-            {this.props.screen.screenWidth > 800 && this.props.screen.screenHeight > 800 ? 
-              <Box width="1100px" mt={0} container>
+            {this.props.screen.screenWidth > 700 && this.props.screen.screenHeight > 700 ? 
+              <Box width="60vw" mt={0} container>
                   <Card style={styles.card}>
                     <CardActionArea>
                       <CardMedia>
@@ -183,7 +183,7 @@ class ProjectCarousel extends Component {
                           >
                           {this.state.projectFileNames.map((project, i) =>
                               <div>
-                                  <video controls width="800px" height='550' src={this.state.projects[i]} />
+                                  <video controls width="80%"  src={this.state.projects[i]} />
                               </div>
                               
                           )}
@@ -191,12 +191,11 @@ class ProjectCarousel extends Component {
                         </CardMedia>
                       </CardActionArea>
                   </Card>
-                  <Box pt={3} width="95%" >
+                  <Box mt={3} width="100%" >
                     {projectInfo.map((project, i) => 
-                    <Box pb={2} >
+                    <Box mb={1} >
                       <Grid container direction="row"      >
-                          <Grid item  xs={1} />
-                          <Grid item  xs={3} >
+                          <Grid item  xs={4} >
                               <Typography style={styles.projectName} align="right">{project.name}</Typography>
                           </Grid>
                           <Grid item  xs={1} >
@@ -256,14 +255,14 @@ class ProjectCarousel extends Component {
                   </Card>
                   <Box width="95%" >
                     {projectInfo.map((project, i) => 
-                    <Box pl={3} pb={1} >
+                    <Box pl={3} mb={1} >
                       <Grid container direction="row"      >
-                        <Box pb={2}>
+                        <Box pb={1}>
                           <Grid item  xs={12}>
                               <Typography style={styles.projectNameMobile} align="left">{project.name}</Typography>
                           </Grid>
                           </Box>
-                          <Box pb={2}>
+                          <Box pb={1}>
                           <Grid item  xs={12} >
                             <ButtonBase size="small" variant="outlined" type="button"  onClick= {() => { this.navToProjectRepo(project.repoLink) }}>
                               <Typography style={styles.projectRepoMobile} align="center">Link To Repo</Typography>
@@ -271,7 +270,7 @@ class ProjectCarousel extends Component {
                           </Grid>
                           </Box>
                           <Grid item xs={12}/>
-                          <Box pb={2}>
+                          <Box pb={1}>
                           <Grid item xs={5}>
                               <Typography style={styles.projectTechMobile}  align="left">Technologies:</Typography>
                           </Grid>
@@ -287,7 +286,7 @@ class ProjectCarousel extends Component {
                           
                           {/* end of row 1 */}
                           <Grid item   />
-                          <Box pb={2}>
+                          <Box pb={1}>
                           <Grid item >
                               <Typography style={styles.projectDescriptionMobile}  align="left">{project.description}</Typography>
                           </Grid>

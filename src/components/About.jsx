@@ -67,14 +67,14 @@ class About extends Component{
                 overflowX: 'hidden',
                 backgroundColor: '#DDFABB',
                 boxShadow: 'none',
-                paddingTop: 60,
+                paddingTop: '4vh',
             },
             imageSize: {
-                height: '375px',
+                height: '35vh',
                 width: 'auto',
-                marginLeft: 10,
-                marginRight: 10,
-                opacity: '90%',
+                // marginLeft: '2vw',
+                // marginRight: '2vw',
+                opacity: '85%',
             },
             imageSizeMobile: {
                 height: '100px',
@@ -87,7 +87,7 @@ class About extends Component{
             },
             aboutFont: {
                 fontFamily: 'Montserrat',
-                fontSize: '18px',
+                fontSize: '15px',
                 color: '#9e9e9e'
               },
               aboutFontMobile: {
@@ -97,8 +97,8 @@ class About extends Component{
               },
               aboutMe: {
                 fontFamily: 'Montserrat',
-                fontSize: '12px',
-                color: '#9e9e9e'
+                fontSize: '11px',
+                color: '#9e9e9e',
               },
               aboutMeMobile: {
                 fontFamily: 'Montserrat',
@@ -110,36 +110,37 @@ class About extends Component{
         return (
             <div>
                 <Paper style={styles.paperContainer}>
-                {this.props.screen.screenWidth > 800 && this.props.screen.screenHeight > 800 ? 
-                    <Grid container direction="row" justify="center" alignItems="center"     >
+                {this.props.screen.screenWidth > 700 && this.props.screen.screenHeight > 700 ? 
+                    <Grid container direction="row" justify="" alignItems="center"     >
+                        <Grid item xs={2}></Grid>
+                        <Grid item  xs={4} >
+                            <Box width='32vw'  >
+                                <Typography style={styles.aboutFont} align="left">{this.state.text[0]}</Typography>
+                            </Box>
+                            <Box width='32vw' pt={2} >
+                                <Typography style={styles.aboutFont} align="left">{this.state.text[1]}</Typography>
+                            </Box>
+                        </Grid>
+                        <Grid item xs={1}></Grid>
+                        <Grid item container justify="flex-start"   xs={5}>
+                        <Box pt={3}  >
+                            <img style ={styles.imageSize} src={this.state.images[1]} alt="" ></img>
+                            </Box>
+                        </Grid>
                         <Grid item  xs={5} >
                             <img align='right' style ={styles.imageSize} src={this.state.images[0]} alt="" ></img>
                         </Grid>
                         <Grid item xs={1}></Grid>
                         <Grid item  xs={3}>
-                            <Box pl={2} width='500px'>
-                                <Typography style={styles.aboutFont} align="left">{this.state.text[0]}</Typography>
-                            </Box>
-                            <Box pl={2} pt={2} width='500px'>
-                                <Typography style={styles.aboutFont} align="left">{this.state.text[1]}</Typography>
-                            </Box>
-                        </Grid>
-                        <Grid item xs={3}></Grid>
-                        <Grid item xs={3}></Grid>
-                        <Grid item  xs={3} >
-                            <Box pl={2} width='500px'>
+                            <Box pl={2} width='32vw'>
                                 <Typography style={styles.aboutFont} align="left">{this.state.text[2]}</Typography>
                             </Box>
-                            <Box pl={2} pt={2} width='500px'>
+                            <Box pl={2} pt={2} width='32vw'>
                                 <Typography style={styles.aboutFont} align="left">{this.state.text[3]}</Typography>
                             </Box>
                         </Grid>
-                        <Grid item xs={1}></Grid>
-                        <Grid item  xs={5}>
-                        <Box pt={3} pl={2} >
-                            <img style ={styles.imageSize} src={this.state.images[1]} alt="" ></img>
-                            </Box>
-                        </Grid>
+                        <Grid item xs={3}></Grid>
+                        
                     </Grid>
                     :
                     <Grid container direction="row" justify="center" alignItems="center"     >
@@ -156,7 +157,6 @@ class About extends Component{
                                 <Typography style={styles.aboutFontMobile} align="center">{this.state.text[1]}</Typography>
                             </Box>
                         </Grid>
-                        <Box pb={4}></Box>
                         {/* <Grid item  xs={6} >
                             
                             <img align='right' style ={styles.imageSizeMobile} src={this.state.images[0]} alt="" ></img>
@@ -166,7 +166,7 @@ class About extends Component{
                         </Grid> */}
 
                         <Grid item  xs={12} >
-                            <Box pl={3} pr={3} pb={3} pt={3}>
+                            <Box pl={3} pr={3} pb={3} >
                                 <Typography style={styles.aboutFontMobile} align="center">{this.state.text[2]}</Typography>
                             </Box>
                             <Box pl={3} pr={3}>

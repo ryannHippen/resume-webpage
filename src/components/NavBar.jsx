@@ -36,7 +36,7 @@ const styles = theme => ({
         
     },
     logo: {
-        height: "10vh",
+        height: "8vh",
         // margin: "auto",
         // marginBottom: '-15px',
         // marginLeft: '-15px',
@@ -49,7 +49,7 @@ const styles = theme => ({
   });
 
   const Wrapper = styled.div`
-  max-height: 8vh;
+  max-height: 7vh;
   display: flex;
   align-items: center;
 `;

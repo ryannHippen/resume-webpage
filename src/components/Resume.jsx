@@ -126,12 +126,20 @@ Amplify.configure({
   
   const useStyles = makeStyles(theme => ({
     root: {
+        //flexGrow: 1,
+        //display: 'flex',
+        minHeight: '95vh',
+        backgroundColor: '#c6f1e0',
+        //boxShadow: 'none',
+        //alignItems: 'center',
+    },
+    mobileDisplay: {
         flexGrow: 1,
         display: 'flex',
-        minHeight: '93vh',
-        backgroundColor: '#c6f1e0',
+        minHeight: '80vh',
         boxShadow: 'none',
         alignItems: 'center',
+        //marginTop: -2,
     },
     listItemText:{
         fontSize:'0.1em',
@@ -156,10 +164,11 @@ Amplify.configure({
     },
     tabsMobile: {
         borderRight: `0px solid ${theme.palette.divider}`,
-        marginTop: '9vh',
-        marginBottom: '9vh',
+        marginTop: '7vh',
+        marginBottom: '7vh',
         paddingRight: 27,
-        paddingLeft: 20,
+        marginLeft: 14,
+        paddingLeft: 13,
         color: '#9e9e9e',  
         fontSize: '10px',
     },
@@ -167,7 +176,7 @@ Amplify.configure({
         backgroundColor: 'transparent',
         boxShadow: 'none',
         width: '60vw',
-        paddingTop: '2vh',
+        paddingTop: '4vh',
     },
     paperContainerLeft: {
         backgroundColor: 'transparent',
@@ -179,7 +188,7 @@ Amplify.configure({
         backgroundColor: 'transparent',
         boxShadow: 'none',
         width: '40vw',
-        minHeight: '20vh',
+        minHeight: '18vh',
         overflow: 'hidden',
     },
     paperContainerMobile: {
@@ -227,7 +236,7 @@ Amplify.configure({
     cardMobile: {
         width: "50vw",
         maxHeight: "33vh",
-        overflow: "auto"
+        overflow: "auto",
     },
     educationFont: {
         paddingLeft: '10px',
@@ -305,6 +314,7 @@ Amplify.configure({
     return (
 <MuiThemeProvider theme={theme}>
     <div className={classes.root}>
+        <div className={classes.mobileDisplay}>
         {screen.screenWidth > 700 & screen.screenHeight > 700 ? 
             <Tabs 
                 orientation="vertical"
@@ -482,7 +492,7 @@ Amplify.configure({
             </TabPanel >
             <TabPanel value={value} index={2} >
                 {screen.screenWidth > 700 & screen.screenHeight > 700 ? 
-                <Box pt={7}> 
+                <Box pt={5}> 
                     {work.map((job, i) =>  
                         <Box pl={1}    > 
                             <Paper className={classes.paperContainer}> 
@@ -515,17 +525,17 @@ Amplify.configure({
                     )}
                 </Box> 
                 :
-                <Box pt={1}> 
+                <Box pt={0}> 
                     {work.map((job, i) =>  
-                        <Box pb={2} > 
+                        <Box mb={0} > 
                             <Paper className={classes.paperContainerMobile}> 
                                 <Grid container direction='row'>
                                     <Paper className={classes.paperContainerLeftMobile}>
                                         <Grid direction='column' container >
-                                            <Box pb={0} container >
+                                            <Box mb={1} container >
                                                 <Typography className={classes.companyMobile} >{job.company} - {job.title}</Typography>
                                             </Box>
-                                            <Box pb={1}  container >
+                                            <Box mb={1}  container >
                                                 <Typography className={classes.durationMobile} >{job.duration}</Typography>
                                             </Box>
                                         </Grid>
@@ -533,7 +543,7 @@ Amplify.configure({
                                     <Paper className={classes.paperContainerRightMobile}>
                                         {job.description.map((desc, i) =>    
                                             <Typography className={classes.descriptionMobile} key={i}>
-                                                <Box pb={1}>
+                                                <Box mb={1}>
                                                     {desc}
                                                 </Box>
                                             </Typography>
@@ -547,6 +557,7 @@ Amplify.configure({
                 }
             </TabPanel>
         </Container>
+        </div>
     </div>
     </MuiThemeProvider>
     );

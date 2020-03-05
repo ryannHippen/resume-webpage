@@ -18,7 +18,7 @@ class Home extends Component{
                 overflow: 'hidden',
                 backgroundColor: '#D1F2EB',
                 boxShadow: 'none',  
-                paddingTop: '20vh',
+                paddingTop: '15vh',
                 paddingBottom: '20vh',
             },
             nameFont: {
