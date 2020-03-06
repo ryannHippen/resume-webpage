@@ -116,7 +116,7 @@ class ProjectCarousel extends Component {
         },
         projectNameMobile: {
           fontFamily: 'Montserrat',
-          fontSize: '14px',
+          fontSize: '13px',
           color: '#9389e2',
           fontWeight: 'bold',
         },
@@ -127,7 +127,7 @@ class ProjectCarousel extends Component {
         },
         projectDescriptionMobile: {
           fontFamily: 'Montserrat',
-          fontSize: '12px',
+          fontSize: '11px',
           color: '#9e9e9e'
         },
         projectTech: {
@@ -136,7 +136,7 @@ class ProjectCarousel extends Component {
           color: '#9389e2',
         },
         projectTechMobile: {
-          fontSize: 13,
+          fontSize: 12,
           fontFamily: 'Montserrat',
           color: '#9389e2',
         },
@@ -146,7 +146,7 @@ class ProjectCarousel extends Component {
           color: '#066F64',
         },
         projectRepoMobile: {
-          fontSize: 11,
+          fontSize: 10,
           fontFamily: 'Montserrat',
           color: '#066F64',
         },
@@ -156,10 +156,10 @@ class ProjectCarousel extends Component {
         {'technology': 'CSS', 'svg': Css},
       ]
       const projectInfo  = [
-        {'name': 'Project 1 - Game Search Website: ', 'technologies': [ Material, Reactjs, Redux],
+        {'name': '1 - Game Search Website: ', 'technologies': [ Material, Reactjs, Redux],
         'description': ' Using an external API I created a site that allows you to explore various Video Game Genres with examples of Games they encompass.',
         'repoLink': 'https://github.com/ryannHippen/game-db'},
-        {'name': 'Project 2 - Login with local DB: ', 'technologies': [Material, Reactjs, Redux, Python, Mysql],
+        {'name': '2 - Login with local DB: ', 'technologies': [Material, Reactjs, Redux, Python, Mysql],
         'description': ' I created a login page for a website that allows you to search for video games to get info about them as well as what consoles they are available on. With Python as the API for React I stored hashed passwords in a local MySQL DB and connected with an external API for searching games.',
         'repoLink': 'https://github.com/ryannHippen/game-search-react/tree/master/Documents/workspace-spring-tool-suite-4-4.4.0.RELEASE'},
       ]
@@ -230,7 +230,7 @@ class ProjectCarousel extends Component {
                   </Box>
               </Box>  
             :
-              <Box width="80%" mt={0} container alignItems="center">
+              <Box width="100%" mt={0} container alignItems="center">
                   <Card style={styles.card}>
                       <CardActionArea>
                           <CardContent>
@@ -246,37 +246,37 @@ class ProjectCarousel extends Component {
                                 >
                                 {this.state.projectFileNames.map((project, i) =>
                                     <div>
-                                        <video controls width="70%" height='50%' src={this.state.projects[i]} />
+                                        <video controls width="70%" height='40%' src={this.state.projects[i]} />
                                     </div>
                                 )}
                                 </Carousel>
                           </CardContent>
                       </CardActionArea>
                   </Card>
-                  <Box width="95%" >
+                  <Box width="100%" >
                     {projectInfo.map((project, i) => 
                     <Box pl={3} mb={1} >
                       <Grid container direction="row"      >
-                        <Box pb={1}>
-                          <Grid item  xs={12}>
+                        {/* <Box pb={1}> */}
+                          <Grid item  xs={8}>
                               <Typography style={styles.projectNameMobile} align="left">{project.name}</Typography>
                           </Grid>
-                          </Box>
-                          <Box pb={1}>
-                          <Grid item  xs={12} >
+                          {/* </Box> */}
+                          {/* <Box pb={1}> */}
+                          <Grid item  xs={4} >
                             <ButtonBase size="small" variant="outlined" type="button"  onClick= {() => { this.navToProjectRepo(project.repoLink) }}>
                               <Typography style={styles.projectRepoMobile} align="center">Link To Repo</Typography>
                             </ButtonBase>
                           </Grid>
-                          </Box>
+                          {/* </Box> */}
                           <Grid item xs={12}/>
-                          <Box pb={1}>
+                          <Box pt={1} pb={1}>
                           <Grid item xs={5}>
                               <Typography style={styles.projectTechMobile}  align="left">Technologies:</Typography>
                           </Grid>
                           </Box>
                           <Grid item xs={7}>
-                            <Box ml={2}>
+                            <Box pt={1} ml={2}>
                             {project.technologies.map(svg =>
                               <img style={styles.devIconStyleMobile} src={svg} />
                               )}
