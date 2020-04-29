@@ -200,7 +200,7 @@ class ProjectCarousel extends Component {
                           </Grid>
                           <Grid item  xs={1} >
                             <ButtonBase disableRipple type="button"  onClick= {() => { this.navToProjectRepo(project.repoLink) }}>
-                              <Typography onClick= {() => { this.navToProjectRepo(project.repoLink) }} style={styles.projectRepo}  className="repoButton">Repository</Typography>
+                              <Typography  style={styles.projectRepo}  className="repoButton">Repository</Typography>
                             </ButtonBase>
                           </Grid> 
                           <Grid item  xs={7} />
