@@ -42,7 +42,6 @@ Amplify.configure({
 
 const TextMaskCustom = (props) => {
     const { inputRef, ...other } = props;
-  
     return (
         <MaskedInput
             {...other}
@@ -51,8 +50,8 @@ const TextMaskCustom = (props) => {
             mask={['(', /[1-9]/, /\d/, /\d/, ')', ' ', /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/]}
             placeholderChar={'\u2000'}
             id="text-mask"
-            guide={true}
-            keepCharPositions={true}
+            guide={false}
+            keepCharPositions={false}
         />
     );
   }
@@ -201,13 +200,19 @@ class ResumeContact extends Component{
 
         const phoneNum = e.target.value
         const regex = /\d/;
-
+        //console.log(this.textMask)
         if(!regex.test(phoneNum)){
             this.setState({
-                [name]: phoneNum,
-                phoneNumber: phoneNum,
+                [name]: e.target.value,
+                phoneNumber: e.target.value,
             });
         }
+        // else {
+        //     this.setState({
+        //         [name]:'\u2000'
+        //     });
+            
+        // }
       };
 
     render(){
@@ -323,7 +328,7 @@ class ResumeContact extends Component{
                             id="phoneNumber"
                             label="Contact Number"
                             defaultValue=""
-                            value={this.state.phoneNumber}
+                            //value={this.state.phoneNumber}
                             style={styles.textField}
                             margin="normal"
                             InputProps={{
@@ -331,8 +336,8 @@ class ResumeContact extends Component{
                                 value:this.state.textmask,
                                 onChange: this.handleChange('textmask'),
                                 style: { color: 'white' },
+                                
                             }}
-                            onBlur= {this.state.phoneNumber}
                         />
                         <TextField
                             required

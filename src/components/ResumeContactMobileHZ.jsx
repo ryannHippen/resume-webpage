@@ -59,8 +59,8 @@ const TextMaskCustom = (props) => {
       ref={inputRef}
       mask={['(', /[1-9]/, /\d/, /\d/, ')', ' ', /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/]}
       placeholderChar={'\u2000'}
-      guide={true}
-      keepCharPositions={true}
+      guide={false}
+      keepCharPositions={false}
     />
   );
 }
@@ -74,7 +74,7 @@ class ResumeContactMobile extends Component {
   constructor(props) {
     super(props)
     this.state = {
-        textmask: '(  )    -    ',
+        //textmask: '(  )    -    ',
         firstName: null,
         lastName: null,
         organization: null,
@@ -177,8 +177,8 @@ handleChange = name => e => {
 
     if(!regex.test(phoneNum)){
         this.setState({
-            [name]: phoneNum,
-            phoneNumber: phoneNum,
+            [name]: e.target.value,
+            phoneNumber: e.target.value,
         });
     }
 };
@@ -308,7 +308,7 @@ handleChange = name => e => {
                             onChange: this.handleChange('textmask'),
                             style: { fontSize: 12, color: 'white' }
                         }}
-                        onBlur= {this.state.phoneNumber}
+                        //onBlur= {this.state.phoneNumber}
                     />
                     <TextField
                         required
