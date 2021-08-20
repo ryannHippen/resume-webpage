@@ -17,12 +17,12 @@ function Routes({ location }) {
             <Wrapper>
             <NavBar />
                   <TransitionGroup className="transition-group">
-                    <CSSTransition
+                    {/* <CSSTransition
                       key={location.key}
                       timeout={{ enter: 1000, exit: 1000 }}
                       classNames="slide"
                       // classNames="fade"
-                    >
+                    > */}
                       <section className="route-section">
                         <Switch location={location}>
                             <Route path="/" exact component={Home} />
@@ -32,7 +32,7 @@ function Routes({ location }) {
                             <Route path="/projects" exact component={Projects} />
                         </Switch>
                       </section>
-                    </CSSTransition>
+                    {/* </CSSTransition> */}
                   </TransitionGroup>
                 </Wrapper>
               );

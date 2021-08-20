@@ -3,6 +3,7 @@ import { Typography, Grid, Paper, Box } from '@material-ui/core';
 import Amplify, { Storage } from 'aws-amplify';
 import config from '../ampconfig';
 import { connect } from 'react-redux';
+import Rt from './reactTest2';
 
 Amplify.configure({
     Auth: {
@@ -109,6 +110,7 @@ class About extends Component{
 
         return (
             <div>
+                
                 <Paper style={styles.paperContainer}>
                 {this.props.screen.screenWidth > 700 && this.props.screen.screenHeight > 700 ? 
                     <Grid container direction="row" justify="" alignItems="center"     >
@@ -123,8 +125,8 @@ class About extends Component{
                         </Grid>
                         <Grid item xs={1}></Grid>
                         <Grid item container justify="flex-start"   xs={5}>
-                        <Box pt={3}  >
-                            <img style ={styles.imageSize} src={this.state.images[1]} alt="" ></img>
+                            <Box pt={3}  >
+                                <img style ={styles.imageSize} src={this.state.images[1]} alt="" ></img>
                             </Box>
                         </Grid>
                         <Grid item  xs={5} >

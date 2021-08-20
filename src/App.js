@@ -12,13 +12,12 @@ import { BrowserRouter as Router } from "react-router-dom";
 // Amplify.configure(ampconfig); 
 
 const muiTheme = createMuiTheme({
-  palette: createPalette({  
       primary: Colors.pink,
       '&:hover': {
         primary: Colors.blue,
       }
-  }),
-});
+  });
+  //palette: createPalette({  
 
 class App extends Component {
   // state = { 

@@ -59,6 +59,8 @@ const TextMaskCustom = (props) => {
       ref={inputRef}
       mask={['(', /[1-9]/, /\d/, /\d/, ')', ' ', /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/]}
       placeholderChar={'\u2000'}
+      guide={true}
+      keepCharPositions={true}
     />
   );
 }
@@ -127,9 +129,10 @@ emailValidation = (e) => {
   const email = e.target.value;
   if(email.includes('@') && email.includes('.com')){
   this.setState({ emailValidated: true })
-  } else  {
-    this.setState({ emailValidated: false, openSnackBarEmailValidError: true })
   } 
+  else if(email != null && email != ""){
+    this.setState({ emailValidated: false, openSnackBarEmailValidError: true })
+  }
 };
 
 send = () => { 
@@ -170,10 +173,16 @@ navToLinkedIn = () => {
 }  
 
 handleChange = name => e => {
-  this.setState({
-    [name]: e.target.value,
-    phoneNumber: e.target.value,
-  });
+
+    const phoneNum = e.target.value
+    const regex = /\d/;
+
+    if(!regex.test(phoneNum)){
+        this.setState({
+            [name]: phoneNum,
+            phoneNumber: phoneNum,
+        });
+    }
 };
 
   render() {
@@ -313,6 +322,7 @@ handleChange = name => e => {
                             onChange: this.handleChange('textmask'),
                             style: { fontSize: 12, color: 'white' }
                         }}
+                        onBlur= {this.state.phoneNumber}
                     />
                     <TextField
                         required

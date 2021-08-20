@@ -9,7 +9,7 @@ export default function screenSize(state = initialState, action){
                   return {screen :state.screen}
               } else {
   
-                return {...state.screem, screen: action.size};
+                return {...state.screen, screen: action.size};
               }
               
           default:

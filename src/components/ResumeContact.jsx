@@ -47,8 +47,12 @@ const TextMaskCustom = (props) => {
         <MaskedInput
             {...other}
             ref={inputRef}
+
             mask={['(', /[1-9]/, /\d/, /\d/, ')', ' ', /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/]}
             placeholderChar={'\u2000'}
+            id="text-mask"
+            guide={true}
+            keepCharPositions={true}
         />
     );
   }
@@ -192,11 +196,18 @@ class ResumeContact extends Component{
         window.open("https://www.linkedin.com/in/ryann-hippen-078334167", "_blank")
     }
 
+
     handleChange = name => e => {
-        this.setState({
-            [name]: e.target.value,
-            phoneNumber: e.target.value,
-        });
+
+        const phoneNum = e.target.value
+        const regex = /\d/;
+
+        if(!regex.test(phoneNum)){
+            this.setState({
+                [name]: phoneNum,
+                phoneNumber: phoneNum,
+            });
+        }
       };
 
     render(){
@@ -321,6 +332,7 @@ class ResumeContact extends Component{
                                 onChange: this.handleChange('textmask'),
                                 style: { color: 'white' },
                             }}
+                            onBlur= {this.state.phoneNumber}
                         />
                         <TextField
                             required

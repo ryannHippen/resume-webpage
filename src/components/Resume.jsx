@@ -108,7 +108,7 @@ Amplify.configure({
         {'technology': 'Material UI', 'svg': Material},
         {'technology': 'Bootstrap', 'svg': Bootstrap},
         {'technology': 'JavaScript', 'svg': Javascript},
-        {'technology': 'CSS', 'svg': Css},
+        {'technology': 'CSS', 'svg': Css},  
         {'technology': 'HTML', 'svg': Html},
         {'technology': 'Redux', 'svg': Redux},
     ]
@@ -118,10 +118,10 @@ Amplify.configure({
         {'technology': 'AWS: Cloudfront', 'svg': Cloudfront},
         {'technology': 'AWS: Route 53', 'svg': Route53},
         {'technology': 'AWS: S3', 'svg': S3},
-        {'technology': 'Python', 'svg': Python},
-        {'technology': 'Hibernate', 'svg': Hibernate},
+        //{'technology': 'Python', 'svg': Python},
+        //{'technology': 'Hibernate', 'svg': Hibernate},
         {'technology': 'MySQL', 'svg': Mysql},
-        {'technology': 'Spring Boot', 'svg': Springio},
+        //{'technology': 'Spring Boot', 'svg': Springio},
     ]
   
   const useStyles = makeStyles(theme => ({
